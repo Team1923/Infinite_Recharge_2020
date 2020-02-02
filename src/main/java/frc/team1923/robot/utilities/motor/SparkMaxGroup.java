@@ -22,6 +22,7 @@ public class SparkMaxGroup extends MotorGroup<SparkMaxGroup, CANSparkMax> {
         leader.setIdleMode(this.coast ? IdleMode.kCoast : IdleMode.kBrake);
 
         for (int followerID : this.followerIDs) {
+            @SuppressWarnings("resource")
             CANSparkMax follower = new CANSparkMax(followerID, MotorType.kBrushless);
             follower.restoreFactoryDefaults();
             follower.setIdleMode(this.coast ? IdleMode.kCoast : IdleMode.kBrake);
