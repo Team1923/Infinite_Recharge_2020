@@ -4,32 +4,12 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class SparkMaxGroup {
-    private final int leaderID;
-    private final int[] followerIDs;
-
-    private final boolean inverted;
-    private final boolean coast;
-
-    private SparkMaxGroup(int leaderID, int[] followerIDs, boolean inverted, boolean coast) {
-        this.leaderID = leaderID;
-        this.followerIDs = followerIDs;
-        this.inverted = inverted;
-        this.coast = coast;
-    }
-
+public class SparkMaxGroup extends MotorGroup<CANSparkMax> {
     public SparkMaxGroup(int leaderID, int... followerIDs) {
-        this(leaderID, followerIDs, false, false);
+        super(leaderID, followerIDs);
     }
 
-    public SparkMaxGroup inverting() {
-        return new SparkMaxGroup(this.leaderID, this.followerIDs, true, this.coast);
-    }
-
-    public SparkMaxGroup coasting() {
-        return new SparkMaxGroup(this.leaderID, this.followerIDs, this.inverted, true);
-    }
-
+    @Override
     public CANSparkMax create() {
         CANSparkMax leader = new CANSparkMax(this.leaderID, MotorType.kBrushless);
         leader.restoreFactoryDefaults();
