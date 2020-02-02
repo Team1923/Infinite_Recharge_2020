@@ -1,4 +1,4 @@
-package frc.team1923.robot.utilities;
+package frc.team1923.robot.utilities.motor;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;

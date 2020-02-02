@@ -1,4 +1,4 @@
-package frc.team1923.robot.utilities;
+package frc.team1923.robot.utilities.motor;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
