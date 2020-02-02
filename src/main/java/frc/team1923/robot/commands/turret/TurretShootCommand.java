@@ -1,21 +1,19 @@
 package frc.team1923.robot.commands.turret;
 
 import frc.team1923.robot.RobotContainer;
-import frc.team1923.robot.utilities.Command;
+import frc.team1923.robot.commands.Command;
+import frc.team1923.robot.subsystems.TurretSubsystem;
 
-public class TurretShootCommand extends Command {
-    private final RobotContainer robotContainer;
+public class TurretShootCommand extends Command<TurretSubsystem> {
     private final double speed;
 
     public TurretShootCommand(RobotContainer robotContainer, double speed) {
-        this.robotContainer = robotContainer;
+        super(robotContainer);
         this.speed = speed;
-
-        this.addRequirements(robotContainer.turret);
     }
 
     @Override
     public void initialize() {
-        this.robotContainer.turret.set(this.speed);
+        this.subsystem.set(this.speed);
     }
 }

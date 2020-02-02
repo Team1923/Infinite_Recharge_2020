@@ -1,25 +1,22 @@
 package frc.team1923.robot.commands.drivetrain;
 
 import frc.team1923.robot.RobotContainer;
-import frc.team1923.robot.utilities.Command;
+import frc.team1923.robot.commands.Command;
+import frc.team1923.robot.subsystems.DrivetrainSubsystem;
 
-public class DriveControlCommand extends Command {
-    private final RobotContainer robotContainer;
-
+public class DriveControlCommand extends Command<DrivetrainSubsystem> {
     public DriveControlCommand(RobotContainer robotContainer) {
-        this.robotContainer = robotContainer;
-
-        this.addRequirements(robotContainer.drivetrain);
+        super(robotContainer);
     }
 
     @Override
     public void execute() {
-        double left = this.robotContainer.driver.leftStick.y.get();
-        double right = this.robotContainer.driver.rightStick.y.get();
+        double left = this.driver.leftStick.y.get();
+        double right = this.driver.rightStick.y.get();
 
         left *= 0.3;
         right *= 0.3;
 
-        this.robotContainer.drivetrain.set(left, right);
+        this.subsystem.set(left, right);
     }
 }
