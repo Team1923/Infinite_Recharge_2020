@@ -1,7 +1,7 @@
 package frc.team1923.robot;
 
-import frc.team1923.robot.utilities.SparkMaxGroup;
-import frc.team1923.robot.utilities.TalonFXGroup;
+import frc.team1923.robot.utilities.motor.SparkMaxGroup;
+import frc.team1923.robot.utilities.motor.TalonFXGroup;
 
 public final class Constants {
     private Constants() {}
