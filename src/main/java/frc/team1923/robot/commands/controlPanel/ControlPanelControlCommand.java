@@ -1,10 +1,9 @@
 package frc.team1923.robot.commands.controlPanel;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-
 import frc.team1923.robot.RobotContainer;
+import frc.team1923.robot.utilities.Command;
 
-public class ControlPanelControlCommand extends CommandBase {
+public class ControlPanelControlCommand extends Command {
     private final RobotContainer robotContainer;
 
     public ControlPanelControlCommand(RobotContainer robotContainer) {
@@ -19,10 +18,5 @@ public class ControlPanelControlCommand extends CommandBase {
         double right = this.robotContainer.operator.rightTrigger.get();
 
         this.robotContainer.controlPanel.set(right - left);
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        this.robotContainer.controlPanel.stop();
     }
 }

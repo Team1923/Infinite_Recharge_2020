@@ -1,10 +1,9 @@
 package frc.team1923.robot.commands.intake;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-
 import frc.team1923.robot.RobotContainer;
+import frc.team1923.robot.utilities.Command;
 
-public class IntakeIntakeCommand extends CommandBase {
+public class IntakeIntakeCommand extends Command {
     private final RobotContainer robotContainer;
     private final double speed;
 
@@ -18,10 +17,5 @@ public class IntakeIntakeCommand extends CommandBase {
     @Override
     public void initialize() {
         this.robotContainer.intake.set(this.speed);
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        this.robotContainer.intake.stop();
     }
 }

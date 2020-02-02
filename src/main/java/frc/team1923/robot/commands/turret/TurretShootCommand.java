@@ -1,10 +1,9 @@
 package frc.team1923.robot.commands.turret;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-
 import frc.team1923.robot.RobotContainer;
+import frc.team1923.robot.utilities.Command;
 
-public class TurretShootCommand extends CommandBase {
+public class TurretShootCommand extends Command {
     private final RobotContainer robotContainer;
     private final double speed;
 
@@ -18,10 +17,5 @@ public class TurretShootCommand extends CommandBase {
     @Override
     public void initialize() {
         this.robotContainer.turret.set(this.speed);
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        this.robotContainer.turret.stop();
     }
 }

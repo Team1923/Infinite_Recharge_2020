@@ -1,10 +1,9 @@
 package frc.team1923.robot.commands.drivetrain;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-
 import frc.team1923.robot.RobotContainer;
+import frc.team1923.robot.utilities.Command;
 
-public class DriveControlCommand extends CommandBase {
+public class DriveControlCommand extends Command {
     private final RobotContainer robotContainer;
 
     public DriveControlCommand(RobotContainer robotContainer) {
@@ -22,10 +21,5 @@ public class DriveControlCommand extends CommandBase {
         right *= 0.3;
 
         this.robotContainer.drivetrain.set(left, right);
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        this.robotContainer.drivetrain.stop();
     }
 }
