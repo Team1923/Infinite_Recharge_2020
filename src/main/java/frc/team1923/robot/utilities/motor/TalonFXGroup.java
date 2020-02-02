@@ -3,9 +3,14 @@ package frc.team1923.robot.utilities.motor;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-public class TalonFXGroup extends MotorGroup<WPI_TalonFX> {
+public class TalonFXGroup extends MotorGroup<TalonFXGroup, WPI_TalonFX> {
     public TalonFXGroup(int leaderID, int... followerIDs) {
         super(leaderID, followerIDs);
+    }
+
+    @Override
+    protected TalonFXGroup getThis() {
+        return this;
     }
 
     @Override
