@@ -10,25 +10,18 @@ import frc.team1923.robot.commands.turret.TurretShootCommand;
 import frc.team1923.robot.subsystems.ControlPanelSubsystem;
 import frc.team1923.robot.subsystems.DrivetrainSubsystem;
 import frc.team1923.robot.subsystems.IntakeSubsystem;
-import frc.team1923.robot.subsystems.Subsystem;
 import frc.team1923.robot.subsystems.TurretSubsystem;
 import frc.team1923.robot.utilities.controller.PS4Controller;
 import frc.team1923.robot.utilities.controller.XboxController;
 
-import java.util.Set;
-
 public class RobotContainer {
-    public final Set<Subsystem> subsystems = Set.of(
-        new DrivetrainSubsystem(),
-        new TurretSubsystem(),
-        new IntakeSubsystem(),
-        new ControlPanelSubsystem()
-    );
+    public final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+    public final TurretSubsystem turret = new TurretSubsystem();
+    public final IntakeSubsystem intake = new IntakeSubsystem();
+    public final ControlPanelSubsystem controlPanel = new ControlPanelSubsystem();
 
     public final PS4Controller driver = new PS4Controller(Controllers.DRIVER);
     public final XboxController operator = new XboxController(Controllers.OPERATOR);
-
-    public final Command autonomousCommand = null;
 
     public RobotContainer() {
         new DriveControlCommand(this).setAsDefault();
@@ -37,5 +30,9 @@ public class RobotContainer {
         this.operator.x.toggleWhenPressed(new TurretShootCommand(this, 0.5));
         this.operator.a.whenHeld(new IntakeIntakeCommand(this, 0.75));
         this.operator.b.whenHeld(new IntakeIntakeCommand(this, -0.75));
+    }
+
+    public Command getAutonomousCommand() {
+        return null;
     }
 }

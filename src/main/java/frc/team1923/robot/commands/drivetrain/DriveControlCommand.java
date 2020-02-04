@@ -1,10 +1,8 @@
 package frc.team1923.robot.commands.drivetrain;
 
 import frc.team1923.robot.RobotContainer;
-import frc.team1923.robot.commands.Command;
-import frc.team1923.robot.subsystems.DrivetrainSubsystem;
 
-public class DriveControlCommand extends Command<DrivetrainSubsystem> {
+public class DriveControlCommand extends DrivetrainCommand {
     public DriveControlCommand(RobotContainer robotContainer) {
         super(robotContainer);
     }
@@ -17,6 +15,6 @@ public class DriveControlCommand extends Command<DrivetrainSubsystem> {
         left *= 0.3;
         right *= 0.3;
 
-        this.subsystem.set(left, right);
+        this.drivetrain.set(left, right);
     }
 }

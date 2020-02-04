@@ -1,10 +1,8 @@
 package frc.team1923.robot.commands.controlPanel;
 
 import frc.team1923.robot.RobotContainer;
-import frc.team1923.robot.commands.Command;
-import frc.team1923.robot.subsystems.ControlPanelSubsystem;
 
-public class ControlPanelControlCommand extends Command<ControlPanelSubsystem> {
+public class ControlPanelControlCommand extends ControlPanelCommand {
     public ControlPanelControlCommand(RobotContainer robotContainer) {
         super(robotContainer);
     }
@@ -14,6 +12,6 @@ public class ControlPanelControlCommand extends Command<ControlPanelSubsystem> {
         double left = this.operator.leftTrigger.get();
         double right = this.operator.rightTrigger.get();
 
-        this.subsystem.set(right - left);
+        this.controlPanel.set(right - left);
     }
 }

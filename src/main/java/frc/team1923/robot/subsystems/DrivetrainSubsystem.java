@@ -2,9 +2,11 @@ package frc.team1923.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.team1923.robot.Constants.Drivetrain;
 
-public class DrivetrainSubsystem extends Subsystem {
+public class DrivetrainSubsystem extends SubsystemBase {
     private WPI_TalonFX left = Drivetrain.LEFT.create();
     private WPI_TalonFX right = Drivetrain.RIGHT.create();
 
@@ -13,7 +15,6 @@ public class DrivetrainSubsystem extends Subsystem {
         this.right.set(right);
     }
 
-    @Override
     public void stop() {
         this.left.stopMotor();
         this.right.stopMotor();

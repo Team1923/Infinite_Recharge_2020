@@ -8,10 +8,11 @@ import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1923.robot.Constants.ControlPanel;
 
-public class ControlPanelSubsystem extends Subsystem {
+public class ControlPanelSubsystem extends SubsystemBase {
     private ColorSensorV3 colorSensor = new ColorSensorV3(Port.kOnboard);
     private ColorMatch colorMatch = new ColorMatch();
 
@@ -40,7 +41,6 @@ public class ControlPanelSubsystem extends Subsystem {
         this.spinner.set(speed);
     }
 
-    @Override
     public void stop() {
         this.spinner.stopMotor();
     }
