@@ -28,7 +28,7 @@ public class RobotContainer {
     public final PS4Controller driver = new PS4Controller(Controllers.DRIVER);
     public final XboxController operator = new XboxController(Controllers.OPERATOR);
 
-	public final Command autonomousCommand = null;
+    public final Command autonomousCommand = null;
 
     public RobotContainer() {
         new DriveControlCommand(this).setAsDefault();
