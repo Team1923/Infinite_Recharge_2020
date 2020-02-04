@@ -1,6 +1,6 @@
 package frc.team1923.robot.utilities.motor;
 
-public abstract class MotorGroup<Self extends MotorGroup<Self, Motor>, Motor> {
+public abstract class MotorGroup<This extends MotorGroup<This>> {
     protected final int leaderID;
     protected final int[] followerIDs;
 
@@ -12,17 +12,18 @@ public abstract class MotorGroup<Self extends MotorGroup<Self, Motor>, Motor> {
         this.followerIDs = followerIDs;
     }
 
-    protected abstract Self getThis();
+    @SuppressWarnings("unchecked")
+    private This getThis() {
+        return (This) this;
+    }
 
-    public Self inverting() {
+    public This inverting() {
         this.inverted = true;
         return this.getThis();
     }
 
-    public Self coasting() {
+    public This coasting() {
         this.coast = true;
         return this.getThis();
     }
-
-    public abstract Motor create();
 }

@@ -4,17 +4,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class SparkMaxGroup extends MotorGroup<SparkMaxGroup, CANSparkMax> {
+public class SparkMaxGroup extends MotorGroup<SparkMaxGroup> {
     public SparkMaxGroup(int leaderID, int... followerIDs) {
         super(leaderID, followerIDs);
     }
 
-    @Override
-    protected SparkMaxGroup getThis() {
-        return this;
-    }
-
-    @Override
     public CANSparkMax create() {
         CANSparkMax leader = new CANSparkMax(this.leaderID, MotorType.kBrushless);
         leader.restoreFactoryDefaults();
