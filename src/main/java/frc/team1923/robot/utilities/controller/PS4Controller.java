@@ -3,8 +3,8 @@ package frc.team1923.robot.utilities.controller;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
 public class PS4Controller extends Controller {
-    public final Joystick leftStick = new Joystick(0, 1, AxisRange.Normal, AxisRange.Inverted);
-    public final Joystick rightStick = new Joystick(2, 5, AxisRange.Normal, AxisRange.Inverted);
+    public final Joystick leftStick = new Joystick(0, 1, AxisRange.Normal, AxisRange.Inverted, 0.1);
+    public final Joystick rightStick = new Joystick(2, 5, AxisRange.Normal, AxisRange.Inverted, 0.1);
 
     public final Axis leftTrigger = new Axis(3, AxisRange.Positive);
     public final Axis rightTrigger = new Axis(4, AxisRange.Positive);

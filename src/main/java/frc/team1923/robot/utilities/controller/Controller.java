@@ -16,29 +16,40 @@ public abstract class Controller {
     public class Axis {
         private final int axis;
         private final AxisRange range;
+        private final double deadzone;
 
-        protected Axis(int axis, AxisRange range) {
+        protected Axis(int axis, AxisRange range, double deadzone) {
             this.axis = axis;
             this.range = range;
+            this.deadzone = deadzone;
+        }
+
+        protected Axis(int axis, AxisRange range) {
+            this(axis, range, 0);
+        }
+
+        protected Axis(int axis, double deadzone) {
+            this(axis, AxisRange.Normal, deadzone);
         }
 
         protected Axis(int axis) {
-            this(axis, AxisRange.Normal);
+            this(axis, AxisRange.Normal, 0);
         }
 
         public double get() {
             double raw = DriverStation.getInstance().getStickAxis(Controller.this.port, this.axis);
 
             switch (this.range) {
-                case Normal:
-                    return raw;
                 case Inverted:
-                    return -raw;
+                    raw = -raw;
+                    break;
                 case Positive:
-                    return 0.5 * raw + 0.5;
+                    raw = 0.5 * raw + 0.5;
+                    break;
                 default:
-                    return 0;
             }
+
+            return Math.copySign(Math.max(0, (Math.abs(raw) - this.deadzone) / (1 - this.deadzone)), raw);
         }
 
         public Button withLowerTreshold(double lower) {
@@ -53,9 +64,19 @@ public abstract class Controller {
     public class Joystick {
         public final Axis x, y;
 
+        protected Joystick(int xAxis, int yAxis, AxisRange xRange, AxisRange yRange, double deadzone) {
+            this.x = new Axis(xAxis, xRange, deadzone);
+            this.y = new Axis(yAxis, yRange, deadzone);
+        }
+
         protected Joystick(int xAxis, int yAxis, AxisRange xRange, AxisRange yRange) {
             this.x = new Axis(xAxis, xRange);
             this.y = new Axis(yAxis, yRange);
+        }
+
+        protected Joystick(int xAxis, int yAxis, double deadzone) {
+            this.x = new Axis(xAxis, deadzone);
+            this.y = new Axis(yAxis, deadzone);
         }
 
         protected Joystick(int xAxis, int yAxis) {
