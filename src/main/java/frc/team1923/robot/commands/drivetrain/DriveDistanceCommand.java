@@ -1,22 +1,15 @@
-package frc.team1923.robot.commands;
+package frc.team1923.robot.commands.drivetrain;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
+import frc.team1923.robot.RobotContainer;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.team1923.robot.subsystems.DrivetrainSubsystem;
-
-public class DriveDistanceCommand extends CommandBase {
-    private DrivetrainSubsystem drivetrainSubsystem;
-
-    public DriveDistanceCommand(DrivetrainSubsystem drivetrainSubsystem) {
-        this.addRequirements(this.drivetrainSubsystem = drivetrainSubsystem);
+public class DriveDistanceCommand extends DrivetrainCommand {
+    public DriveDistanceCommand(RobotContainer robotContainer) {
+        super(robotContainer);
     }
 
+    /*
     double target;
 
-    /*
     @Override
     public void initialize() {
         //this.drivetrainSubsystem.resetPosition();
@@ -54,11 +47,6 @@ public class DriveDistanceCommand extends CommandBase {
 
         //this.drivetrainSubsystem.left[0].set(ControlMode.Position, left + 40000);
         //this.drivetrainSubsystem.right[0].set(ControlMode.Position, right + 40000);
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        this.drivetrainSubsystem.stop();
     }
 
     @Override

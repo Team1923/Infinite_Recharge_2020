@@ -1,9 +1,9 @@
-package frc.team1923.robot.commands.controlPanel;
+package frc.team1923.robot.commands.turret;
 
 import frc.team1923.robot.RobotContainer;
 
-public class ControlPanelControlCommand extends ControlPanelCommand {
-    public ControlPanelControlCommand(RobotContainer robotContainer) {
+public class TurretRotateCommand extends TurretCommand {
+    public TurretRotateCommand(RobotContainer robotContainer) {
         super(robotContainer);
     }
 
@@ -12,6 +12,6 @@ public class ControlPanelControlCommand extends ControlPanelCommand {
         double left = this.operator.leftTrigger.get();
         double right = this.operator.rightTrigger.get();
 
-        this.controlPanel.set(right - left);
+        this.turret.set(right - left);
     }
 }

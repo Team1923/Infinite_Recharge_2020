@@ -1,19 +1,19 @@
 package frc.team1923.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1923.robot.Constants.Turret;
 
 public class TurretSubsystem extends SubsystemBase {
-    private WPI_TalonFX shooter = Turret.SHOOTER.create();
+    private CANSparkMax turret = Turret.TURRET.create();
 
     public void set(double speed) {
-        this.shooter.set(speed);
+        this.turret.set(speed);
     }
 
     public void stop() {
-        this.shooter.stopMotor();
+        this.turret.stopMotor();
     }
 }

@@ -11,8 +11,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     private WPI_TalonFX right = Drivetrain.RIGHT.create();
 
     public void set(double left, double right) {
-        this.left.set(left);
-        this.right.set(right);
+        this.left.set(Math.max(-1, Math.min(1, left)));
+        this.right.set(Math.max(-1, Math.min(1, right)));
     }
 
     public void stop() {

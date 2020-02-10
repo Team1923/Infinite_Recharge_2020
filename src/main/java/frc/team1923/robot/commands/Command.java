@@ -18,10 +18,14 @@ public abstract class Command extends CommandBase {
         this.operator = robotContainer.operator;
         this.subsystem = subsystem;
 
-        this.addRequirements(subsystem);
+        if (subsystem != null) {
+            this.addRequirements(subsystem);
+        }
     }
 
     public void setAsDefault() {
-        this.subsystem.setDefaultCommand(this);
+        if (this.subsystem != null) {
+            this.subsystem.setDefaultCommand(this);
+        }
     }
 }
