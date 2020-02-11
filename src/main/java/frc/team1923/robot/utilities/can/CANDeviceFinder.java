@@ -19,7 +19,7 @@ public class CANDeviceFinder {
     public enum DeviceType {
         PDP(0x8041400),
         PCM(0x9041400),
-        TALON_FX(0x2040000), // TODO
+        TALON_FX(0x2041000),
         SPARK_MAX(0x2051800);
 
         private final int deviceID;
