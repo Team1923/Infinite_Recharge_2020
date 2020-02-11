@@ -9,8 +9,8 @@ public final class Constants {
     public static final class Drivetrain {
         private Drivetrain() {}
 
-        public static final TalonFXGroup LEFT = new TalonFXGroup(4, 5, 6);
-        public static final TalonFXGroup RIGHT = new TalonFXGroup(1, 2, 3).inverting();
+        public static final TalonFXGroup LEFT = new TalonFXGroup(1, 2, 3);
+        public static final TalonFXGroup RIGHT = new TalonFXGroup(4, 5, 6).inverting();
     }
 
     public static final class Shooter {
