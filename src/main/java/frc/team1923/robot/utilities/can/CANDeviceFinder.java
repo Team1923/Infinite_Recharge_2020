@@ -11,6 +11,7 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -53,6 +54,14 @@ public class CANDeviceFinder {
 
             return IntStream.range(0, 63).filter(i -> before[i] != after[i]).toArray();
         });
+    }
+
+    public static void find(BiConsumer<DeviceType, int[]> callback) {
+        new Thread(() -> {
+            for (Map.Entry<DeviceType, int[]> entry : new CANDeviceFinder().find().entrySet()) {
+                callback.accept(entry.getKey(), entry.getValue());
+            }
+        }).start();
     }
 
     private IntBuffer messageID = ByteBuffer.allocateDirect(4).order(ByteOrder.LITTLE_ENDIAN).asIntBuffer();
