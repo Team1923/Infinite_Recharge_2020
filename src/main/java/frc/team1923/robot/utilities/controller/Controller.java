@@ -129,9 +129,21 @@ public abstract class Controller {
         this.port = port;
     }
 
+    private short leftRumble, rightRumble;
+
     public void setRumble(double left, double right) {
         short leftRumble = (short) (65535 * Math.max(0, Math.min(1, left)));
         short rightRumble = (short) (65535 * Math.max(0, Math.min(1, right)));
-        HAL.setJoystickOutputs((byte) this.port, 0, leftRumble, rightRumble);
+
+        if (this.leftRumble != leftRumble || this.rightRumble != rightRumble) {
+            this.leftRumble = leftRumble;
+            this.rightRumble = rightRumble;
+
+            HAL.setJoystickOutputs((byte) this.port, 0, leftRumble, rightRumble);
+        }
+    }
+
+    public void setRumble(double rumble) {
+        this.setRumble(rumble, rumble);
     }
 }
