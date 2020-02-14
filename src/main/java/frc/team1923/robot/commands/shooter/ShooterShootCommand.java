@@ -12,6 +12,16 @@ public class ShooterShootCommand extends ShooterCommand {
 
     @Override
     public void initialize() {
-        this.shooter.set(this.speed);
+        this.shooter.set(0.4);
+    }
+
+    @Override
+    public void execute() {
+        //this.shooter.set(this.speed);
+        //this.shooter.resetPosition();
+        //this.shooter.setPosition(1000000);
+
+        double rumble = this.shooter.getVelocity() > 16000 ? 0.5 : 0;
+        this.operator.setRumble(rumble);
     }
 }

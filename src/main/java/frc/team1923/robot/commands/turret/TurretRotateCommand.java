@@ -12,6 +12,6 @@ public class TurretRotateCommand extends TurretCommand {
         double left = this.operator.leftTrigger.get();
         double right = this.operator.rightTrigger.get();
 
-        this.turret.set(right - left);
+        this.turret.set(left - right);
     }
 }
