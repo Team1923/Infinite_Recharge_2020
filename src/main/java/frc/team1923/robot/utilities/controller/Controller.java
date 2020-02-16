@@ -129,11 +129,11 @@ public abstract class Controller {
         this.port = port;
     }
 
-    private short leftRumble, rightRumble;
+    private short leftRumble = 0, rightRumble = 0;
 
     public void setRumble(double left, double right) {
-        short leftRumble = (short) (65535 * Math.max(0, Math.min(1, left)));
-        short rightRumble = (short) (65535 * Math.max(0, Math.min(1, right)));
+        short leftRumble = (short) Math.round(65535 * Math.max(0, Math.min(1, left)));
+        short rightRumble = (short) Math.round(65535 * Math.max(0, Math.min(1, right)));
 
         if (this.leftRumble != leftRumble || this.rightRumble != rightRumble) {
             this.leftRumble = leftRumble;
