@@ -11,12 +11,12 @@ import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class CANDeviceFinder {
+public final class CANDeviceFinder {
     public enum DeviceType {
         PDP(0x8041400),
         PCM(0x9041400),
@@ -37,8 +37,10 @@ public class CANDeviceFinder {
         }
     }
 
-    public Map<DeviceType, int[]> find() {
-        Map<DeviceType, long[]> beforeTimeStamps = this.lastTimeStamps();
+    private CANDeviceFinder() {}
+
+    public static Map<DeviceType, int[]> find() {
+        Map<DeviceType, long[]> beforeTimeStamps = CANDeviceFinder.lastTimeStamps();
 
         try {
             Thread.sleep(200);
@@ -46,7 +48,7 @@ public class CANDeviceFinder {
             Thread.currentThread().interrupt();
         }
 
-        Map<DeviceType, long[]> afterTimeStamps = this.lastTimeStamps();
+        Map<DeviceType, long[]> afterTimeStamps = CANDeviceFinder.lastTimeStamps();
 
         return DeviceType.map(deviceType -> {
             long[] before = beforeTimeStamps.get(deviceType);
@@ -56,23 +58,20 @@ public class CANDeviceFinder {
         });
     }
 
-    public static void find(BiConsumer<DeviceType, int[]> callback) {
+    public static void find(Consumer<Map<DeviceType, int[]>> callback) {
         new Thread(() -> {
-            for (Map.Entry<DeviceType, int[]> entry : new CANDeviceFinder().find().entrySet()) {
-                callback.accept(entry.getKey(), entry.getValue());
-            }
+            callback.accept(CANDeviceFinder.find());
         }).start();
     }
 
-    private IntBuffer messageID = ByteBuffer.allocateDirect(4).order(ByteOrder.LITTLE_ENDIAN).asIntBuffer();
-    private ByteBuffer timeStamp = ByteBuffer.allocateDirect(4).order(ByteOrder.LITTLE_ENDIAN);
+    private static long lastTimeStamp(int deviceID) {
+        IntBuffer messageID = ByteBuffer.allocateDirect(4).order(ByteOrder.LITTLE_ENDIAN).asIntBuffer();
+        ByteBuffer timeStamp = ByteBuffer.allocateDirect(4).order(ByteOrder.LITTLE_ENDIAN);
 
-    private long lastTimeStamp(int messageID) {
-        this.messageID.put(0, messageID);
-        this.timeStamp.putInt(0, 0);
+        messageID.put(0, deviceID);
 
         try {
-            CANJNI.FRCNetCommCANSessionMuxReceiveMessage(this.messageID, 0x1FFFFFFF, timeStamp);
+            CANJNI.FRCNetCommCANSessionMuxReceiveMessage(messageID, 0x1FFFFFFF, timeStamp);
         } catch (CANInvalidBufferException
                | CANMessageNotAllowedException
                | CANMessageNotFoundException
@@ -80,12 +79,12 @@ public class CANDeviceFinder {
             return 0;
         }
 
-        return Integer.toUnsignedLong(this.timeStamp.getInt(0));
+        return Integer.toUnsignedLong(timeStamp.getInt(0));
     }
 
-    private Map<DeviceType, long[]> lastTimeStamps() {
+    private static Map<DeviceType, long[]> lastTimeStamps() {
         return DeviceType.map(deviceType -> IntStream.range(0, 63)
-                                                     .mapToLong(i -> this.lastTimeStamp(deviceType.deviceID | i))
+                                                     .mapToLong(i -> CANDeviceFinder.lastTimeStamp(deviceType.deviceID | i))
                                                      .toArray());
     }
 }
