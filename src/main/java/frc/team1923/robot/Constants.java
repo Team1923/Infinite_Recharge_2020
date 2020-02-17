@@ -16,25 +16,31 @@ public final class Constants {
     public static final class Shooter {
         private Shooter() {}
 
-        public static final TalonFXGroup SHOOTER = new TalonFXGroup(7, 8, 9).inverting().coasting();
+        public static final TalonFXGroup SHOOTER = new TalonFXGroup(7, 8, 9).inverting();
     }
 
     public static final class Intake {
         private Intake() {}
 
-        public static final SparkMaxGroup INTAKE = new SparkMaxGroup(10, 11);
+        public static final SparkMaxGroup INTAKE = new SparkMaxGroup(10);
     }
 
     public static final class Indexer {
         private Indexer() {}
 
-        public static final SparkMaxGroup INDEXER = new SparkMaxGroup(12);
+        public static final SparkMaxGroup INDEXER = new SparkMaxGroup(11);
+    }
+
+    public static final class Conveyor {
+        private Conveyor() {}
+
+        public static final SparkMaxGroup CONVEYOR = new SparkMaxGroup(12);
     }
 
     public static final class Turret {
         private Turret() {}
 
-        public static final SparkMaxGroup TURRET = new SparkMaxGroup(13);
+        public static final SparkMaxGroup TURRET = new SparkMaxGroup(13).softLimiting(-190, 190);
     }
 
     public static final class ControlPanel {

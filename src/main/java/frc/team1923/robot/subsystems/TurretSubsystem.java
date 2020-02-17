@@ -2,7 +2,6 @@ package frc.team1923.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
-import com.revrobotics.CANSparkMax.SoftLimitDirection;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -12,12 +11,7 @@ public class TurretSubsystem extends SubsystemBase {
     private CANSparkMax turret = Turret.TURRET.create();
 
     public TurretSubsystem() {
-        this.turret.setSoftLimit(SoftLimitDirection.kForward, 190.9f);
-        this.turret.enableSoftLimit(SoftLimitDirection.kForward, true);
-        this.turret.setSoftLimit(SoftLimitDirection.kReverse, -190.9f);
-        this.turret.enableSoftLimit(SoftLimitDirection.kReverse, true);
-
-        this.turret.getPIDController().setP(0.2);
+        this.turret.getPIDController().setP(0.1);
     }
 
     public void set(double speed) {
