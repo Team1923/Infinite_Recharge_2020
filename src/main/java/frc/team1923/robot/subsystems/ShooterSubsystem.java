@@ -13,24 +13,18 @@ public class ShooterSubsystem extends SubsystemBase {
     public ShooterSubsystem() {
         this.shooter.config_kP(0, 0);
         this.shooter.config_kF(0, 0.05);
-        this.shooter.configMotionCruiseVelocity(15000);
-        this.shooter.configMotionAcceleration(30000);
     }
 
     public void set(double speed) {
         this.shooter.set(speed);
     }
 
-    public void setPosition(double position) {
-        this.shooter.set(ControlMode.MotionMagic, position);
-    }
-
-    public void resetPosition() {
-        this.shooter.setSelectedSensorPosition(0);
+    public void setVelocity(double velocity) {
+        this.shooter.set(ControlMode.Velocity, velocity);
     }
 
     public double getVelocity() {
-        return this.shooter.getSelectedSensorVelocity();
+        return this.shooter.getSelectedSensorVelocity() * 600 / 2048.0;
     }
 
     public void stop() {
