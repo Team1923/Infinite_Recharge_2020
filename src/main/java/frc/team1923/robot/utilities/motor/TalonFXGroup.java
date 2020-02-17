@@ -10,24 +10,26 @@ public class TalonFXGroup extends MotorGroup<TalonFXGroup> {
     }
 
     public WPI_TalonFX create() {
-        TalonFXConfiguration config = new TalonFXConfiguration();
+        TalonFXConfiguration leaderConfig = new TalonFXConfiguration();
 
         if (this.softLimit) {
-            config.forwardSoftLimitThreshold = (int) Math.round(this.forwardSoftLimit * 2048);
-            config.reverseSoftLimitThreshold = (int) Math.round(this.forwardSoftLimit * 2048);
+            leaderConfig.forwardSoftLimitThreshold = (int) Math.round(this.forwardSoftLimit * 2048);
+            leaderConfig.reverseSoftLimitThreshold = (int) Math.round(this.forwardSoftLimit * 2048);
 
-            config.forwardSoftLimitEnable = true;
-            config.reverseSoftLimitEnable = true;
+            leaderConfig.forwardSoftLimitEnable = true;
+            leaderConfig.reverseSoftLimitEnable = true;
         }
 
         WPI_TalonFX leader = new WPI_TalonFX(this.leaderID);
-        leader.configAllSettings(config);
+        leader.configAllSettings(leaderConfig);
         leader.setInverted(this.inverted);
         leader.setNeutralMode(this.coast ? NeutralMode.Coast : NeutralMode.Brake);
 
+        TalonFXConfiguration followerConfig = new TalonFXConfiguration();
+
         for (int followerID : this.followerIDs) {
             WPI_TalonFX follower = new WPI_TalonFX(followerID);
-            follower.configFactoryDefault();
+            follower.configAllSettings(followerConfig)
             follower.setInverted(this.inverted);
             follower.setNeutralMode(this.coast ? NeutralMode.Coast : NeutralMode.Brake);
             follower.follow(leader);
