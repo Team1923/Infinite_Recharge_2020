@@ -29,7 +29,7 @@ public class TalonFXGroup extends MotorGroup<TalonFXGroup> {
 
         for (int followerID : this.followerIDs) {
             WPI_TalonFX follower = new WPI_TalonFX(followerID);
-            follower.configAllSettings(followerConfig)
+            follower.configAllSettings(followerConfig);
             follower.setInverted(this.inverted);
             follower.setNeutralMode(this.coast ? NeutralMode.Coast : NeutralMode.Brake);
             follower.follow(leader);
