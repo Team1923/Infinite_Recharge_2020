@@ -26,6 +26,10 @@ public class TurretSubsystem extends SubsystemBase {
         return this.turret.getEncoder().getPosition();
     }
 
+    public void resetPosition(double position) {
+        this.turret.getEncoder().setPosition(position);
+    }
+
     public void stop() {
         this.turret.stopMotor();
     }
