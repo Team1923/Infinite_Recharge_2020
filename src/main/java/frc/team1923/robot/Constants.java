@@ -40,7 +40,7 @@ public final class Constants {
     public static final class Turret {
         private Turret() {}
 
-        public static final SparkMaxGroup TURRET = new SparkMaxGroup(13).softLimiting(-190, 190);
+        public static final SparkMaxGroup TURRET = new SparkMaxGroup(13).softLimiting(190, -190);
     }
 
     public static final class ControlPanel {
