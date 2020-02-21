@@ -16,7 +16,7 @@ public final class Constants {
     public static final class Shooter {
         private Shooter() {}
 
-        public static final TalonFXGroup SHOOTER = new TalonFXGroup(7, 8, 9).inverting();
+        public static final TalonFXGroup SHOOTER = new TalonFXGroup(7, 8, 9).inverting().ramping(0.5).withPIDF(0.2, 0, 0, 0.05);
     }
 
     public static final class Intake {
@@ -40,7 +40,7 @@ public final class Constants {
     public static final class Turret {
         private Turret() {}
 
-        public static final SparkMaxGroup TURRET = new SparkMaxGroup(13).softLimiting(190, -190);
+        public static final SparkMaxGroup TURRET = new SparkMaxGroup(13).softLimiting(190, -190).withPIDF(0.1, 0, 0, 0);
     }
 
     public static final class ControlPanel {
