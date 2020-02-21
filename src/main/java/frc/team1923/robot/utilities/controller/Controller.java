@@ -129,7 +129,8 @@ public abstract class Controller {
         this.port = port;
     }
 
-    private short leftRumble = 0, rightRumble = 0;
+    private short leftRumble = 0;
+    private short rightRumble = 0;
 
     public void setRumble(double left, double right) {
         short leftRumble = (short) Math.round(65535 * Math.max(0, Math.min(1, left)));
