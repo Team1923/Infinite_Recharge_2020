@@ -9,6 +9,6 @@ public class IndexerIndexCommand extends IndexerCommand {
 
     @Override
     public void execute() {
-        this.indexer.set(this.operator.rightStick.y.get());
+        this.indexer.set(this.operator.leftStick.y.get());
     }
 }
