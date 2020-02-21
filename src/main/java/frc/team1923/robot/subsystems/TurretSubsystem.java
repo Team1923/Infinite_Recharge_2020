@@ -10,10 +10,6 @@ import frc.team1923.robot.Constants.Turret;
 public class TurretSubsystem extends SubsystemBase {
     private CANSparkMax turret = Turret.TURRET.create();
 
-    public TurretSubsystem() {
-        this.turret.getPIDController().setP(0.1);
-    }
-
     public void set(double speed) {
         this.turret.set(speed);
     }
