@@ -1,5 +1,6 @@
 package frc.team1923.robot.utilities.motor;
 
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
@@ -12,9 +13,17 @@ public class SparkMaxGroup extends MotorGroup<SparkMaxGroup> {
 
     public CANSparkMax create() {
         CANSparkMax leader = new CANSparkMax(this.leaderID, MotorType.kBrushless);
+
         leader.restoreFactoryDefaults();
         leader.setInverted(this.inverted);
         leader.setIdleMode(this.coast ? IdleMode.kCoast : IdleMode.kBrake);
+        leader.setClosedLoopRampRate(this.rampRate);
+
+        CANPIDController pidController = leader.getPIDController();
+        pidController.setP(this.p);
+        pidController.setI(this.i);
+        pidController.setD(this.d);
+        pidController.setFF(this.f);
 
         if (this.softLimit) {
             leader.setSoftLimit(SoftLimitDirection.kForward, (float) this.forwardSoftLimit);
@@ -27,6 +36,7 @@ public class SparkMaxGroup extends MotorGroup<SparkMaxGroup> {
         for (int followerID : this.followerIDs) {
             @SuppressWarnings("resource")
             CANSparkMax follower = new CANSparkMax(followerID, MotorType.kBrushless);
+
             follower.restoreFactoryDefaults();
             follower.setIdleMode(this.coast ? IdleMode.kCoast : IdleMode.kBrake);
             follower.follow(leader);
