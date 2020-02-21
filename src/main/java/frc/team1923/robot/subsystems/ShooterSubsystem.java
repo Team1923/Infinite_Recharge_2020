@@ -10,17 +10,12 @@ import frc.team1923.robot.Constants.Shooter;
 public class ShooterSubsystem extends SubsystemBase {
     private WPI_TalonFX shooter = Shooter.SHOOTER.create();
 
-    public ShooterSubsystem() {
-        this.shooter.config_kP(0, 0);
-        this.shooter.config_kF(0, 0.05);
-    }
-
     public void set(double speed) {
         this.shooter.set(speed);
     }
 
     public void setVelocity(double velocity) {
-        this.shooter.set(ControlMode.Velocity, velocity);
+        this.shooter.set(ControlMode.Velocity, velocity * 2048 / 600.0);
     }
 
     public double getVelocity() {
