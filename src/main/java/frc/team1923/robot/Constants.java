@@ -52,7 +52,7 @@ public final class Constants {
     public static final class Climber {
         private Climber() {}
 
-        public static final SparkMaxGroup CLIMBER = new SparkMaxGroup(15);
+        public static final TalonFXGroup CLIMBER = new TalonFXGroup(15);
     }
 
     public static final class Controllers {
