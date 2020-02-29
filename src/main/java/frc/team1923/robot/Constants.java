@@ -35,6 +35,9 @@ public final class Constants {
         private Conveyor() {}
 
         public static final SparkMaxGroup CONVEYOR = new SparkMaxGroup(12);
+
+        public static final int CONVEYOR_HAS_BALL_SENSOR = 0;
+        public static final int INDEXER_HAS_BALL_SENSOR = 1;
     }
 
     public static final class Turret {

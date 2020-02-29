@@ -10,8 +10,8 @@ import frc.team1923.robot.Constants.Conveyor;
 public class ConveyorSubsystem extends SubsystemBase {
     private CANSparkMax conveyor = Conveyor.CONVEYOR.create();
 
-    private DigitalInput conveyorProximitySensor = new DigitalInput(0);
-    private DigitalInput indexerProximitySensor = new DigitalInput(1);
+    private DigitalInput conveyorHasBallSensor = new DigitalInput(Conveyor.CONVEYOR_HAS_BALL_SENSOR);
+    private DigitalInput indexerHasBallSensor = new DigitalInput(Conveyor.INDEXER_HAS_BALL_SENSOR);
 
     public void set(double speed) {
         this.conveyor.set(speed);
@@ -22,10 +22,10 @@ public class ConveyorSubsystem extends SubsystemBase {
     }
 
     public boolean conveyorHasBall() {
-        return !this.conveyorProximitySensor.get();
+        return !this.conveyorHasBallSensor.get();
     }
 
     public boolean indexerHasBall() {
-        return !this.indexerProximitySensor.get();
+        return !this.indexerHasBallSensor.get();
     }
 }
