@@ -12,8 +12,8 @@ public class DriveArcadeCommand extends DrivetrainCommand {
         double left = this.driver.leftStick.y.get();
         double right = this.driver.rightStick.x.get();
 
-        left = Math.pow(left, 3);
-        right = Math.pow(right, 3);
+        left *= Math.abs(left);
+        right *= Math.abs(right);
 
         this.drivetrain.set(left + right, left - right);
     }
