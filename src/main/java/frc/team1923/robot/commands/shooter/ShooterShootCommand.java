@@ -1,27 +1,35 @@
 package frc.team1923.robot.commands.shooter;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.team1923.robot.RobotContainer;
 
 public class ShooterShootCommand extends ShooterCommand {
-    private final double speed;
+    private double velocity;
 
-    public ShooterShootCommand(RobotContainer robotContainer, double speed) {
+    public ShooterShootCommand(RobotContainer robotContainer, double velocity) {
         super(robotContainer);
-        this.speed = speed;
+
+        this.velocity = velocity;
+
+        SmartDashboard.putNumber("Target RPM", velocity);
     }
 
     @Override
     public void initialize() {
-        this.shooter.set(0.4);
+        this.velocity = SmartDashboard.getNumber("Target RPM", this.velocity);
+        this.shooter.setVelocity(this.velocity);
     }
 
     @Override
     public void execute() {
-        //this.shooter.set(this.speed);
-        //this.shooter.resetPosition();
-        //this.shooter.setPosition(1000000);
+        SmartDashboard.putBoolean("Spun Up", this.shooter.getVelocity() > this.velocity - 50);
+    }
 
-        double rumble = this.shooter.getVelocity() > 16000 ? 0.5 : 0;
-        this.operator.setRumble(rumble);
+    @Override
+    public void end(boolean interrupted) {
+        super.end(interrupted);
+
+        SmartDashboard.putBoolean("Spun Up", false);
     }
 }
