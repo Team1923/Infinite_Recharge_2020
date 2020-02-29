@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.team1923.robot.RobotContainer;
 
-public class TurretRotateCommand extends TurretCommand {
-    public TurretRotateCommand(RobotContainer robotContainer) {
+public class TurretControlCommand extends TurretCommand {
+    public TurretControlCommand(RobotContainer robotContainer) {
         super(robotContainer);
     }
 
