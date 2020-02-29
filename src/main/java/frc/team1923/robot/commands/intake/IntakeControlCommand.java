@@ -2,8 +2,8 @@ package frc.team1923.robot.commands.intake;
 
 import frc.team1923.robot.RobotContainer;
 
-public class IntakeIntakeCommand extends IntakeCommand {
-    public IntakeIntakeCommand(RobotContainer robotContainer) {
+public class IntakeControlCommand extends IntakeCommand {
+    public IntakeControlCommand(RobotContainer robotContainer) {
         super(robotContainer);
     }
 
