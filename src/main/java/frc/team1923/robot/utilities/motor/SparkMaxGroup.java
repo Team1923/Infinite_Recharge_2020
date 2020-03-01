@@ -17,7 +17,9 @@ public class SparkMaxGroup extends MotorGroup<SparkMaxGroup> {
         leader.restoreFactoryDefaults();
         leader.setInverted(this.inverted);
         leader.setIdleMode(this.coast ? IdleMode.kCoast : IdleMode.kBrake);
+
         leader.setClosedLoopRampRate(this.rampRate);
+        leader.setOpenLoopRampRate(this.rampRate);
 
         CANPIDController pidController = leader.getPIDController();
         pidController.setP(this.p);
