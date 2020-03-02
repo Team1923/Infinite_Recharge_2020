@@ -7,6 +7,8 @@ import frc.team1923.robot.RobotContainer;
 public class TurretControlCommand extends TurretCommand {
     public TurretControlCommand(RobotContainer robotContainer) {
         super(robotContainer);
+
+        SmartDashboard.putBoolean("Following", false);
     }
 
     @Override
