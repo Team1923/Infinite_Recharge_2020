@@ -3,6 +3,8 @@ package frc.team1923.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.team1923.robot.Constants.Controllers;
+import frc.team1923.robot.commands.climber.ClimberControlCommand;
+import frc.team1923.robot.commands.controlPanel.ControlPanelControlCommand;
 import frc.team1923.robot.commands.conveyor.ConveyorControlCommand;
 import frc.team1923.robot.commands.conveyor.ConveyorShiftCommand;
 import frc.team1923.robot.commands.drivetrain.DriveArcadeCommand;
@@ -32,8 +34,8 @@ public class RobotContainer {
     public final IndexerSubsystem indexer = new IndexerSubsystem();
     public final ConveyorSubsystem conveyor = new ConveyorSubsystem();
     public final TurretSubsystem turret = new TurretSubsystem();
-    public final ControlPanelSubsystem controlPanel = null; //new ControlPanelSubsystem();
-    public final ClimberSubsystem climber = null; //new ClimberSubsystem();
+    public final ControlPanelSubsystem controlPanel = new ControlPanelSubsystem();
+    public final ClimberSubsystem climber = new ClimberSubsystem();
 
     public final Limelight limelight = new Limelight();
 
@@ -46,8 +48,10 @@ public class RobotContainer {
         new IndexerControlCommand(this).setAsDefault();
         new ConveyorControlCommand(this).setAsDefault();
         new TurretControlCommand(this).setAsDefault();
+        new ControlPanelControlCommand(this).setAsDefault();
+        new ClimberControlCommand(this).setAsDefault();
 
-        this.operator.x.toggleWhenPressed(new ShooterShootCommand(this, 5000));
+        this.operator.x.toggleWhenPressed(new ShooterShootCommand(this));
         this.operator.dPad.down.whenPressed(new IndexerCycleCommand(this));
         this.operator.a.toggleWhenPressed(new RepeatedCommand(new ConveyorShiftCommand(this)));
         this.operator.b.toggleWhenPressed(new TurretFollowCommand(this));
