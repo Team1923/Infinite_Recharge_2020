@@ -11,8 +11,10 @@ public class ConfigurableDouble {
         NetworkTableEntry entry = SmartDashboard.getEntry(name);
         entry.addListener(entryNotification -> callback.accept(entryNotification.value.getDouble()), EntryListenerFlags.kUpdate);
 
-        entry.setDefaultDouble(defaultValue);
-        callback.accept(entry.getDouble(defaultValue));
+        defaultValue = entry.getDouble(defaultValue);
+        entry.setDouble(-1337);
+        entry.setDouble(defaultValue);
+        callback.accept(defaultValue);
     }
 
     public ConfigurableDouble(String name, DoubleConsumer callback) {
