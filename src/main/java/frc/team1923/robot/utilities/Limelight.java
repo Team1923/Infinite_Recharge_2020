@@ -41,5 +41,6 @@ public class Limelight {
 
     public void setCameraMode(boolean driverCamera) {
         this.table.getEntry("camMode").setDouble(driverCamera ? 1 : 0);
+        this.table.getEntry("ledMode").setDouble(driverCamera ? 1 : 0);
     }
 }
