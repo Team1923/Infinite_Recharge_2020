@@ -6,6 +6,7 @@ import frc.team1923.robot.Constants.Controllers;
 import frc.team1923.robot.commands.climber.ClimberControlCommand;
 import frc.team1923.robot.commands.controlPanel.ControlPanelControlCommand;
 import frc.team1923.robot.commands.conveyor.ConveyorControlCommand;
+import frc.team1923.robot.commands.conveyor.ConveyorSetCommand;
 import frc.team1923.robot.commands.conveyor.ConveyorShiftCommand;
 import frc.team1923.robot.commands.drivetrain.DriveArcadeCommand;
 import frc.team1923.robot.commands.indexer.IndexerControlCommand;
@@ -53,6 +54,7 @@ public class RobotContainer {
 
         this.operator.x.toggleWhenPressed(new ShooterShootCommand(this));
         this.operator.dPad.down.whenPressed(new IndexerCycleCommand(this));
+        this.operator.dPad.up.whenHeld(new ConveyorSetCommand(this, 1));
         this.operator.a.toggleWhenPressed(new RepeatedCommand(new ConveyorShiftCommand(this)));
         this.operator.b.toggleWhenPressed(new TurretFollowCommand(this));
     }
