@@ -12,6 +12,7 @@ import frc.team1923.robot.commands.drivetrain.DriveArcadeCommand;
 import frc.team1923.robot.commands.indexer.IndexerControlCommand;
 import frc.team1923.robot.commands.indexer.IndexerCycleCommand;
 import frc.team1923.robot.commands.intake.IntakeControlCommand;
+import frc.team1923.robot.commands.intake.IntakeSetCommand;
 import frc.team1923.robot.commands.shooter.ShooterShootCommand;
 import frc.team1923.robot.commands.turret.TurretFollowCommand;
 import frc.team1923.robot.commands.turret.TurretControlCommand;
@@ -53,7 +54,8 @@ public class RobotContainer {
         new ClimberControlCommand(this).setAsDefault();
 
         this.operator.x.toggleWhenPressed(new ShooterShootCommand(this));
-        this.operator.dPad.down.whenPressed(new IndexerCycleCommand(this));
+        this.operator.leftBumper.whileHeld(new IndexerCycleCommand(this));
+        this.operator.leftBumper.whenHeld(new IntakeSetCommand(this, 1));
         this.operator.dPad.up.whenHeld(new ConveyorSetCommand(this, 1));
         this.operator.a.toggleWhenPressed(new RepeatedCommand(new ConveyorShiftCommand(this)));
         this.operator.b.toggleWhenPressed(new TurretFollowCommand(this));
