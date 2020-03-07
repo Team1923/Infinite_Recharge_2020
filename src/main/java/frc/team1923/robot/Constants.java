@@ -6,8 +6,8 @@ import frc.team1923.robot.utilities.motor.TalonFXGroup;
 public final class Constants {
     private Constants() {}
 
-    public static final class Drivetrain {
-        private Drivetrain() {}
+    public static final class Drive {
+        private Drive() {}
 
         public static final TalonFXGroup LEFT = new TalonFXGroup(1, 2, 3);
         public static final TalonFXGroup RIGHT = new TalonFXGroup(4, 5, 6).inverting();

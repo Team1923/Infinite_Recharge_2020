@@ -1,8 +1,8 @@
-package frc.team1923.robot.commands.drivetrain;
+package frc.team1923.robot.commands.drive;
 
 import frc.team1923.robot.RobotContainer;
 
-public class DriveArcadeCommand extends DrivetrainCommand {
+public class DriveArcadeCommand extends DriveCommand {
     public DriveArcadeCommand(RobotContainer robotContainer) {
         super(robotContainer);
     }
@@ -15,6 +15,6 @@ public class DriveArcadeCommand extends DrivetrainCommand {
         left *= Math.abs(left);
         right *= Math.abs(right);
 
-        this.drivetrain.set(left + right, left - right);
+        this.drive.set(left + right, left - right);
     }
 }
