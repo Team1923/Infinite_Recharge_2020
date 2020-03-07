@@ -9,10 +9,24 @@ public class Limelight {
 
     public Limelight(String table) {
         this.table = NetworkTableInstance.getDefault().getTable(table);
+        this.disable();
     }
 
     public Limelight() {
         this("limelight");
+    }
+
+    public void setEnabled(boolean enable) {
+        this.table.getEntry("camMode").setDouble(enable ? 0 : 1);
+        this.table.getEntry("ledMode").setDouble(enable ? 0 : 1);
+    }
+
+    public void enable() {
+        this.setEnabled(true);
+    }
+
+    public void disable() {
+        this.setEnabled(false);
     }
 
     public boolean hasValidTarget() {
@@ -37,10 +51,5 @@ public class Limelight {
 
     public void setPipeline(int pipeline) {
         this.table.getEntry("pipeline").setDouble(pipeline);
-    }
-
-    public void setCameraMode(boolean driverCamera) {
-        this.table.getEntry("camMode").setDouble(driverCamera ? 1 : 0);
-        this.table.getEntry("ledMode").setDouble(driverCamera ? 1 : 0);
     }
 }
