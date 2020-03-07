@@ -42,11 +42,11 @@ public class TurretSubsystem extends SubsystemBase {
     }
 
     public double getHeading() {
-        return this.gyro.getAngle() / 360;
+        return this.gyro.getAngle();
     }
 
     public double getHeadingRate() {
-        return this.gyro.getRate() / 360;
+        return this.gyro.getRate();
     }
 
     public void resetHeading() {
@@ -65,7 +65,5 @@ public class TurretSubsystem extends SubsystemBase {
 
             this.resetPosition(0);
         }
-
-        SmartDashboard.putNumber("Turret Position", this.getPosition());
     }
 }
