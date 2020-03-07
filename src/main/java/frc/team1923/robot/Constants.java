@@ -44,7 +44,9 @@ public final class Constants {
     public static final class Turret {
         private Turret() {}
 
-        public static final SparkMaxGroup TURRET = new SparkMaxGroup(10).softLimiting(186, -33).withPIDF(0.04, 0, 0, 0);
+        public static final double TURRET_RATIO = 27 * 120 / 22.0;
+
+        public static final SparkMaxGroup TURRET = new SparkMaxGroup(10).softLimiting(TURRET_RATIO * 5 / 4, -TURRET_RATIO / 4).withPIDF(0.04, 0, 0, 0);
 
         public static final int IS_AT_ZERO_SENSOR = 3;
     }
