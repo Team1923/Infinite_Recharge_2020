@@ -9,9 +9,9 @@ public class IndexerCycleCommand extends SequentialCommandGroup {
     public IndexerCycleCommand(RobotContainer robotContainer) {
         this.addCommands(
             new IndexerSetCommand(robotContainer, -0.75).withTimeout(0.25),
-            new WaitCommand(0.25),
+            new WaitCommand(0.1),
             new IndexerSetCommand(robotContainer, 0.75).withTimeout(0.25),
-            new WaitCommand(0.25)
+            new WaitCommand(0.1)
         );
     }
 }

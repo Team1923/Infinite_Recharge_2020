@@ -9,8 +9,8 @@ public final class Constants {
     public static final class Drivetrain {
         private Drivetrain() {}
 
-        public static final TalonFXGroup LEFT = new TalonFXGroup(1, 2, 3).ramping(1.5);
-        public static final TalonFXGroup RIGHT = new TalonFXGroup(4, 5, 6).inverting().ramping(1.5);
+        public static final TalonFXGroup LEFT = new TalonFXGroup(1, 2, 3);
+        public static final TalonFXGroup RIGHT = new TalonFXGroup(4, 5, 6).inverting();
     }
 
     public static final class Shooter {
@@ -34,18 +34,19 @@ public final class Constants {
     public static final class Conveyor {
         private Conveyor() {}
 
-        public static final SparkMaxGroup CONVEYOR = new SparkMaxGroup(14);
+        public static final SparkMaxGroup CONVEYOR = new SparkMaxGroup(14).inverting();
 
-        public static final int CONVEYOR_HAS_BALL_SENSOR = 0;
-        public static final int INDEXER_HAS_BALL_SENSOR = 1;
+        public static final int INDEXER_HAS_BALL_SENSOR = 0;
+        public static final int CONVEYOR_HAS_BALL_SENSOR = 1;
+        public static final int TURRET_HAS_BALL_SENSOR = 2;
     }
 
     public static final class Turret {
         private Turret() {}
 
-        public static final SparkMaxGroup TURRET = new SparkMaxGroup(10).softLimiting(190, -190).withPIDF(0.04, 0, 0, 0);
+        public static final SparkMaxGroup TURRET = new SparkMaxGroup(10).softLimiting(250, -46).withPIDF(0.04, 0, 0, 0);
 
-        public static final int IS_AT_ZERO_SENSOR = 2;
+        public static final int IS_AT_ZERO_SENSOR = 3;
     }
 
     public static final class ControlPanel {

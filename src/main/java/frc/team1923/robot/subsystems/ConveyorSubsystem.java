@@ -12,6 +12,7 @@ public class ConveyorSubsystem extends SubsystemBase {
 
     private DigitalInput conveyorHasBallSensor = new DigitalInput(Conveyor.CONVEYOR_HAS_BALL_SENSOR);
     private DigitalInput indexerHasBallSensor = new DigitalInput(Conveyor.INDEXER_HAS_BALL_SENSOR);
+    private DigitalInput turretHasBallSensor = new DigitalInput(Conveyor.TURRET_HAS_BALL_SENSOR);
 
     public void set(double speed) {
         this.conveyor.set(speed);
@@ -27,5 +28,9 @@ public class ConveyorSubsystem extends SubsystemBase {
 
     public boolean indexerHasBall() {
         return !this.indexerHasBallSensor.get();
+    }
+
+    public boolean turretHasBall() {
+        return !this.turretHasBallSensor.get();
     }
 }

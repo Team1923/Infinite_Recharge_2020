@@ -3,6 +3,7 @@ package frc.team1923.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,6 +14,8 @@ public class TurretSubsystem extends SubsystemBase {
     private CANSparkMax turret = Turret.TURRET.create();
 
     private DigitalInput isAtZeroSensor = new DigitalInput(Turret.IS_AT_ZERO_SENSOR);
+
+    private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 
     public void set(double speed) {
         this.turret.set(speed);
@@ -36,6 +39,18 @@ public class TurretSubsystem extends SubsystemBase {
 
     public boolean isAtZero() {
         return this.isAtZeroSensor.get();
+    }
+
+    public double getHeading() {
+        return this.gyro.getAngle() / 360;
+    }
+
+    public double getHeadingRate() {
+        return this.gyro.getRate() / 360;
+    }
+
+    public void resetHeading() {
+        this.gyro.reset();
     }
 
     {
