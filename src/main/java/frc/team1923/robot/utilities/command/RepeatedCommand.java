@@ -10,11 +10,11 @@ public class RepeatedCommand extends PerpetualCommand {
 
     @Override
     public void execute() {
-        super.execute();
+        this.m_command.execute();
 
         if (this.m_command.isFinished()) {
-            this.end(false);
-            this.initialize();
+            this.m_command.end(false);
+            this.m_command.initialize();
         }
     }
 }
