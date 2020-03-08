@@ -2,6 +2,7 @@ package frc.team1923.robot.utilities.controller;
 
 import edu.wpi.first.wpilibj2.command.button.Button;
 
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleSupplier;
 import java.util.function.DoubleUnaryOperator;
 
@@ -58,7 +59,23 @@ public class Axis {
         });
     }
 
+    public Axis clamp() {
+        return new Axis(() -> Math.min(Math.max(this.get(), -1), 1));
+    }
+
     public Axis map(DoubleUnaryOperator function) {
         return new Axis(() -> function.applyAsDouble(this.get()));
+    }
+
+    public Axis add(Axis axis) {
+        return new Axis(() -> this.get() + axis.get());
+    }
+
+    public Axis subtract(Axis axis) {
+        return new Axis(() -> this.get() - axis.get());
+    }
+
+    public Axis combineWith(DoubleBinaryOperator function, Axis axis) {
+        return new Axis(() -> function.applyAsDouble(this.get(), axis.get()));
     }
 }
