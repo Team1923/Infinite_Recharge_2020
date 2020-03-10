@@ -1,15 +1,15 @@
 package frc.team1923.robot.commands.drive;
 
-import frc.team1923.robot.RobotContainer;
-import frc.team1923.robot.commands.Command;
 import frc.team1923.robot.subsystems.DriveSubsystem;
+import frc.team1923.robot.utilities.command.Command;
 
 public abstract class DriveCommand extends Command {
     protected final DriveSubsystem drive;
 
-    protected DriveCommand(RobotContainer robotContainer) {
-        super(robotContainer, robotContainer.drive);
-        this.drive = robotContainer.drive;
+    protected DriveCommand(DriveSubsystem drive) {
+        super(drive);
+
+        this.drive = drive;
     }
 
     @Override

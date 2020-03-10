@@ -9,7 +9,7 @@ public class DriveSubsystem extends SubsystemBase {
     private final Motor left = Drive.LEFT.create();
     private final Motor right = Drive.RIGHT.create();
 
-    public void set(double left, double right) {
+    public void setSpeed(double left, double right) {
         this.left.setSpeed(left);
         this.right.setSpeed(right);
     }

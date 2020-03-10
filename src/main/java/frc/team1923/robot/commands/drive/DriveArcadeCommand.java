@@ -1,20 +1,10 @@
 package frc.team1923.robot.commands.drive;
 
-import frc.team1923.robot.RobotContainer;
+import frc.team1923.robot.subsystems.DriveSubsystem;
+import frc.team1923.robot.utilities.controller.Axis;
 
-public class DriveArcadeCommand extends DriveCommand {
-    public DriveArcadeCommand(RobotContainer robotContainer) {
-        super(robotContainer);
-    }
-
-    @Override
-    public void execute() {
-        double left = this.driver.leftStick.y.get();
-        double right = this.driver.rightStick.x.get();
-
-        left *= Math.abs(left);
-        right *= Math.abs(right);
-
-        this.drive.set(left + right, left - right);
+public class DriveArcadeCommand extends DriveTankCommand {
+    public DriveArcadeCommand(DriveSubsystem drive, Axis speed, Axis rotation) {
+        super(drive, speed.add(rotation).clamp(), speed.subtract(rotation).clamp());
     }
 }
