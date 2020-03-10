@@ -3,6 +3,7 @@ package frc.team1923.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import frc.team1923.robot.Constants.Conveyor;
+import frc.team1923.robot.utilities.command.Subsystem;
 
 public class ConveyorSubsystem extends Subsystem {
     public ConveyorSubsystem() {

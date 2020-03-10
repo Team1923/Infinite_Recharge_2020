@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.Color;
 
 import frc.team1923.robot.Constants.ControlPanel;
+import frc.team1923.robot.utilities.command.Subsystem;
 
 public class ControlPanelSubsystem extends Subsystem {
     private final ColorSensorV3 colorSensor = new ColorSensorV3(Port.kOnboard);
