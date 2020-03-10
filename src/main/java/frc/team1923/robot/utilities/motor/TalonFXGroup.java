@@ -3,13 +3,13 @@ package frc.team1923.robot.utilities.motor;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-public class TalonFXGroup extends MotorGroup {
+public class TalonFXGroup extends TunableMotorGroup {
     public TalonFXGroup(int leaderID, int... followerIDs) {
         super(leaderID, followerIDs);
     }
 
     @Override
-    public Motor create() {
+    public TunableMotor createTunable() {
         TalonFX leader = new TalonFX(this.leaderID);
 
         leader.configFactoryDefault();
@@ -23,14 +23,6 @@ public class TalonFXGroup extends MotorGroup {
             leader.configForwardSoftLimitEnable(true);
             leader.configReverseSoftLimitEnable(true);
         }
-
-        leader.configOpenloopRamp(this.rampRate);
-        leader.configClosedloopRamp(this.rampRate);
-
-        leader.config_kP(0, this.p);
-        leader.config_kI(0, this.i);
-        leader.config_kD(0, this.d);
-        leader.config_kF(0, this.f);
 
         for (int followerID : this.followerIDs) {
             TalonFX follower = new TalonFX(followerID);

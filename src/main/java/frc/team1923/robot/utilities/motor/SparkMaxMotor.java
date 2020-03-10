@@ -5,7 +5,7 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 
-public class SparkMaxMotor implements Motor {
+public class SparkMaxMotor implements TunableMotor {
     private final CANSparkMax sparkMax;
     private final CANEncoder encoder;
     private final CANPIDController pidController;
@@ -44,5 +44,31 @@ public class SparkMaxMotor implements Motor {
     @Override
     public void setVelocity(double velocity) {
         this.pidController.setReference(velocity, ControlType.kVelocity);
+    }
+
+    @Override
+    public void setRamp(double rate) {
+        this.sparkMax.setOpenLoopRampRate(rate);
+        this.sparkMax.setClosedLoopRampRate(rate);
+    }
+
+    @Override
+    public void setP(double p) {
+        this.pidController.setP(p);
+    }
+
+    @Override
+    public void setI(double i) {
+        this.pidController.setI(i);
+    }
+
+    @Override
+    public void setD(double d) {
+        this.pidController.setD(d);
+    }
+
+    @Override
+    public void setF(double f) {
+        this.pidController.setFF(f);
     }
 }

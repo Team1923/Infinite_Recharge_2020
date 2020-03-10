@@ -3,7 +3,7 @@ package frc.team1923.robot.utilities.motor;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-public class TalonFXMotor implements Motor {
+public class TalonFXMotor implements TunableMotor {
     private final TalonFX talonFX;
 
     public TalonFXMotor(TalonFX talonFX) {
@@ -38,5 +38,31 @@ public class TalonFXMotor implements Motor {
     @Override
     public double getVelocity() {
         return this.talonFX.getSelectedSensorVelocity() * 600 / 2048.0;
+    }
+
+    @Override
+    public void setRamp(double rate) {
+        this.talonFX.configOpenloopRamp(rate);
+        this.talonFX.configClosedloopRamp(rate);
+    }
+
+    @Override
+    public void setP(double p) {
+        this.talonFX.config_kP(0, p);
+    }
+
+    @Override
+    public void setI(double i) {
+        this.talonFX.config_kI(0, i);
+    }
+
+    @Override
+    public void setD(double d) {
+        this.talonFX.config_kD(0, d);
+    }
+
+    @Override
+    public void setF(double f) {
+        this.talonFX.config_kF(0, f);
     }
 }
