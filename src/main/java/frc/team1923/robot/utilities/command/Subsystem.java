@@ -6,10 +6,10 @@ import frc.team1923.robot.utilities.motor.Motor;
 import frc.team1923.robot.utilities.motor.MotorGroup;
 import frc.team1923.robot.utilities.motor.OptimizedMotor;
 
-public abstract class Subsystem extends SubsystemBase {
+public class Subsystem extends SubsystemBase {
     private final Motor motor;
 
-    protected Subsystem(MotorGroup motorGroup) {
+    public Subsystem(MotorGroup motorGroup) {
         this.motor = new OptimizedMotor(motorGroup.create());
     }
 
