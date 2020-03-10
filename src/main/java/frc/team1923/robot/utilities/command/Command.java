@@ -9,14 +9,10 @@ public abstract class Command extends CommandBase {
     protected Command(Subsystem subsystem) {
         this.subsystem = subsystem;
 
-        if (subsystem != null) {
-            this.addRequirements(subsystem);
-        }
+        this.addRequirements(subsystem);
     }
 
     public void setAsDefault() {
-        if (this.subsystem != null) {
-            this.subsystem.setDefaultCommand(this);
-        }
+        this.subsystem.setDefaultCommand(this);
     }
 }
