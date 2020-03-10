@@ -4,12 +4,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1923.robot.utilities.motor.Motor;
 import frc.team1923.robot.utilities.motor.MotorGroup;
+import frc.team1923.robot.utilities.motor.OptimizedMotor;
 
 public abstract class Subsystem extends SubsystemBase {
     private final Motor motor;
 
-    protected Subsystem(MotorGroup<?> motorGroup) {
-        this.motor = motorGroup.create();
+    protected Subsystem(MotorGroup motorGroup) {
+        this.motor = new OptimizedMotor(motorGroup.create());
     }
 
     public void setSpeed(double speed) {

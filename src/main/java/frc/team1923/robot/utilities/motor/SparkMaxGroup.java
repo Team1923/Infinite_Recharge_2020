@@ -6,26 +6,18 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class SparkMaxGroup extends MotorGroup<SparkMaxGroup> {
+public class SparkMaxGroup extends MotorGroup {
     public SparkMaxGroup(int leaderID, int... followerIDs) {
         super(leaderID, followerIDs);
     }
 
-    public CANSparkMax create() {
+    @Override
+    public Motor create() {
         CANSparkMax leader = new CANSparkMax(this.leaderID, MotorType.kBrushless);
 
         leader.restoreFactoryDefaults();
-        leader.setInverted(this.inverted);
+        leader.setInverted(this.invert);
         leader.setIdleMode(this.coast ? IdleMode.kCoast : IdleMode.kBrake);
-
-        leader.setClosedLoopRampRate(this.rampRate);
-        leader.setOpenLoopRampRate(this.rampRate);
-
-        CANPIDController pidController = leader.getPIDController();
-        pidController.setP(this.p);
-        pidController.setI(this.i);
-        pidController.setD(this.d);
-        pidController.setFF(this.f);
 
         if (this.softLimit) {
             leader.setSoftLimit(SoftLimitDirection.kForward, (float) this.forwardSoftLimit);
@@ -34,6 +26,15 @@ public class SparkMaxGroup extends MotorGroup<SparkMaxGroup> {
             leader.enableSoftLimit(SoftLimitDirection.kForward, true);
             leader.enableSoftLimit(SoftLimitDirection.kReverse, true);
         }
+
+        leader.setOpenLoopRampRate(this.rampRate);
+        leader.setClosedLoopRampRate(this.rampRate);
+
+        CANPIDController pidController = leader.getPIDController();
+        pidController.setP(this.p);
+        pidController.setI(this.i);
+        pidController.setD(this.d);
+        pidController.setFF(this.f);
 
         for (int followerID : this.followerIDs) {
             @SuppressWarnings("resource")
@@ -44,6 +45,6 @@ public class SparkMaxGroup extends MotorGroup<SparkMaxGroup> {
             follower.follow(leader);
         }
 
-        return leader;
+        return new SparkMaxMotor(leader);
     }
 }
