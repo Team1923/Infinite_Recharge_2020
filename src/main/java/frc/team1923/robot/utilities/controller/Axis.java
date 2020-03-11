@@ -37,45 +37,39 @@ public class Axis {
         return Axis.fromButton(button, 0, 1);
     }
 
-    public Axis withDeadzone(double deadzone) {
-        return new Axis(() -> {
-            double value = this.get();
-            return Math.copySign(Math.max(0, (Math.abs(value) - deadzone) / (1 - deadzone)), value);
-        });
-    }
-
-    public Axis invert() {
-        return new Axis(() -> -this.get());
-    }
-
-    public Axis positive() {
-        return new Axis(() -> this.get() * 0.5 + 0.5);
-    }
-
-    public Axis squared() {
-        return new Axis(() -> {
-            double value = this.get();
-            return value * Math.abs(value);
-        });
-    }
-
-    public Axis clamp() {
-        return new Axis(() -> Math.min(Math.max(this.get(), -1), 1));
-    }
-
     public Axis map(DoubleUnaryOperator function) {
         return new Axis(() -> function.applyAsDouble(this.get()));
     }
 
+    public Axis withDeadzone(double deadzone) {
+        return this.map(value -> Math.copySign(Math.max(0, (Math.abs(value) - deadzone) / (1 - deadzone)), value));
+    }
+
+    public Axis invert() {
+        return this.map(value -> -value);
+    }
+
+    public Axis positive() {
+        return this.map(value -> value * 0.5 + 0.5);
+    }
+
+    public Axis squared() {
+        return this.map(value -> value * Math.abs(value));
+    }
+
+    public Axis clamp() {
+        return this.map(value -> Math.min(Math.max(value, -1), 1));
+    }
+
+    public Axis combineWith(Axis axis, DoubleBinaryOperator function) {
+        return this.map(value -> function.applyAsDouble(value, axis.get()));
+    }
+
     public Axis add(Axis axis) {
-        return new Axis(() -> this.get() + axis.get());
+        return this.combineWith(axis, (left, right) -> left + right);
     }
 
     public Axis subtract(Axis axis) {
-        return new Axis(() -> this.get() - axis.get());
-    }
-
-    public Axis combineWith(DoubleBinaryOperator function, Axis axis) {
-        return new Axis(() -> function.applyAsDouble(this.get(), axis.get()));
+        return this.combineWith(axis, (left, right) -> left - right);
     }
 }

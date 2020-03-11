@@ -4,10 +4,10 @@ import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.Button;
 
-public abstract class Controller {
+public class Controller {
     private final int port;
 
-    protected Controller(int port) {
+    public Controller(int port) {
         this.port = port;
     }
 
