@@ -5,7 +5,7 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 
-public class SparkMaxMotor extends CANSparkMax implements TunableMotor {
+public class SparkMaxMotor extends CANSparkMax implements TunableMotor, FollowerMotor<SparkMaxMotor> {
     private final CANEncoder encoder = this.getEncoder();
     private final CANPIDController pidController = this.getPIDController();
 
@@ -83,5 +83,10 @@ public class SparkMaxMotor extends CANSparkMax implements TunableMotor {
     @Override
     public void setF(double f) {
         this.pidController.setFF(f);
+    }
+
+    @Override
+    public void follow(SparkMaxMotor leader) {
+        this.follow((CANSparkMax) leader);
     }
 }
