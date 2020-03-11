@@ -7,7 +7,7 @@ import frc.team1923.robot.utilities.motor.group.MotorGroup;
 
 public class SingleMotorSubsystem<T extends Motor> extends MotorSubsystem {
     private final T rawMotor;
-    private final OptimizedMotor motor;
+    private final Motor motor;
 
     public SingleMotorSubsystem(MotorGroup<T> motorGroup) {
         this.rawMotor = motorGroup.create();
