@@ -1,10 +1,14 @@
-package frc.team1923.robot.utilities;
+package frc.team1923.robot.utilities.vision;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Limelight {
     private final NetworkTable table;
+
+    private boolean enabled;
+    private int pipeline;
+
     private double x, y;
 
     public Limelight(String table) {
@@ -16,9 +20,13 @@ public class Limelight {
         this("limelight");
     }
 
-    public void setEnabled(boolean enable) {
-        this.table.getEntry("camMode").setDouble(enable ? 0 : 1);
-        this.table.getEntry("ledMode").setDouble(enable ? 0 : 1);
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+
+        this.table.getEntry("camMode").setDouble(enabled ? 0 : 1);
+        this.table.getEntry("ledMode").setDouble(enabled ? 0 : 1);
+
+        if (enabled) this.table.getEntry("pipeline").setDouble(this.pipeline);
     }
 
     public void enable() {
@@ -30,7 +38,7 @@ public class Limelight {
     }
 
     public boolean hasValidTarget() {
-        return this.table.getEntry("tv").getDouble(0) == 1;
+        return this.enabled && this.table.getEntry("tv").getDouble(0) == 1;
     }
 
     public double getX() {
@@ -50,6 +58,10 @@ public class Limelight {
     }
 
     public void setPipeline(int pipeline) {
-        this.table.getEntry("pipeline").setDouble(pipeline);
+        if (this.pipeline != pipeline) {
+            this.pipeline = pipeline;
+
+            if (this.enabled) this.table.getEntry("pipeline").setDouble(pipeline);
+        }
     }
 }
