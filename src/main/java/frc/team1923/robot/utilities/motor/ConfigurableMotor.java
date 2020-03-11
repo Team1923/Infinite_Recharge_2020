@@ -1,6 +1,6 @@
 package frc.team1923.robot.utilities.motor;
 
-public interface TunableMotor extends Motor {
+public interface ConfigurableMotor<T extends ConfigurableMotor<T>> extends Motor {
     void setSoftLimits(double reverse, double forward);
     void enableSoftLimits(boolean enable);
 
@@ -18,4 +18,6 @@ public interface TunableMotor extends Motor {
     void setI(double i);
     void setD(double d);
     void setF(double f);
+
+    void follow(T leader);
 }

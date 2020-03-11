@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-public class TalonFXMotor extends TalonFX implements TunableMotor, FollowerMotor<TalonFXMotor> {
+public class TalonFXMotor extends TalonFX implements ConfigurableMotor<TalonFXMotor> {
     public TalonFXMotor(int deviceID, boolean invert, boolean brake) {
         super(deviceID);
 
