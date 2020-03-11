@@ -6,15 +6,7 @@ public class SparkMaxGroup extends TunableMotorGroup<SparkMaxMotor> {
     }
 
     @Override
-    protected SparkMaxMotor createTunable() {
-        SparkMaxMotor leader = new SparkMaxMotor(this.leaderID, this.invert, !this.coast);
-
-        for (int followerID : this.followerIDs) {
-            @SuppressWarnings("resource")
-            SparkMaxMotor follower = new SparkMaxMotor(followerID, this.invert, !this.coast);
-            follower.follow(leader);
-        }
-
-        return leader;
+    protected SparkMaxMotor create(int deviceID) {
+        return new SparkMaxMotor(deviceID, this.invert, !this.coast);
     }
 }

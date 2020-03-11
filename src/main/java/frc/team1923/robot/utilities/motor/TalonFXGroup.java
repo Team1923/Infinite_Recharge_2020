@@ -6,14 +6,7 @@ public class TalonFXGroup extends TunableMotorGroup<TalonFXMotor> {
     }
 
     @Override
-    protected TalonFXMotor createTunable() {
-        TalonFXMotor leader = new TalonFXMotor(this.leaderID, this.invert, !this.coast);
-
-        for (int followerID : this.followerIDs) {
-            TalonFXMotor follower = new TalonFXMotor(followerID, this.invert, !this.coast);
-            follower.follow(leader);
-        }
-
-        return leader;
+    protected TalonFXMotor create(int deviceID) {
+        return new TalonFXMotor(deviceID, this.invert, !this.coast);
     }
 }
