@@ -44,6 +44,18 @@ public class TalonFXMotor extends TalonFX implements TunableMotor {
     }
 
     @Override
+    public void setSoftLimits(double reverse, double forward) {
+        this.configForwardSoftLimitThreshold((int) Math.round(forward * 2048));
+        this.configReverseSoftLimitThreshold((int) Math.round(reverse * 2048));
+    }
+
+    @Override
+    public void enableSoftLimits(boolean enable) {
+        this.configForwardSoftLimitEnable(enable);
+        this.configReverseSoftLimitEnable(enable);
+    }
+
+    @Override
     public void setRamp(double rate) {
         this.configOpenloopRamp(rate);
         this.configClosedloopRamp(rate);

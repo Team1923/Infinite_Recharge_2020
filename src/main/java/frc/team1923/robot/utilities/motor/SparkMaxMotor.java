@@ -48,6 +48,18 @@ public class SparkMaxMotor extends CANSparkMax implements TunableMotor {
     }
 
     @Override
+    public void setSoftLimits(double reverse, double forward) {
+        this.setSoftLimit(SoftLimitDirection.kForward, (float) forward);
+        this.setSoftLimit(SoftLimitDirection.kReverse, (float) reverse);
+    }
+
+    @Override
+    public void enableSoftLimits(boolean enable) {
+        this.enableSoftLimit(SoftLimitDirection.kForward, enable);
+        this.enableSoftLimit(SoftLimitDirection.kReverse, enable);
+    }
+
+    @Override
     public void setRamp(double rate) {
         this.setOpenLoopRampRate(rate);
         this.setClosedLoopRampRate(rate);
