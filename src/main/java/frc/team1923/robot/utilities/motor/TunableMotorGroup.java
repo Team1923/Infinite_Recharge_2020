@@ -1,15 +1,15 @@
 package frc.team1923.robot.utilities.motor;
 
-public abstract class TunableMotorGroup extends MotorGroup {
+public abstract class TunableMotorGroup<T extends TunableMotor> extends MotorGroup<T> {
     protected TunableMotorGroup(int leaderID, int... followerIDs) {
         super(leaderID, followerIDs);
     }
 
-    public abstract TunableMotor createTunable();
+    public abstract T createTunable();
 
     @Override
-    public Motor create() {
-        TunableMotor motor = this.createTunable();
+    public T create() {
+        T motor = this.createTunable();
 
         motor.setRamp(this.rampRate);
 

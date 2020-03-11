@@ -1,20 +1,13 @@
 package frc.team1923.robot.utilities.motor;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
-public class TalonFXGroup extends TunableMotorGroup {
+public class TalonFXGroup extends TunableMotorGroup<TalonFXMotor> {
     public TalonFXGroup(int leaderID, int... followerIDs) {
         super(leaderID, followerIDs);
     }
 
     @Override
-    public TunableMotor createTunable() {
-        TalonFX leader = new TalonFX(this.leaderID);
-
-        leader.configFactoryDefault();
-        leader.setInverted(this.invert);
-        leader.setNeutralMode(this.coast ? NeutralMode.Coast : NeutralMode.Brake);
+    public TalonFXMotor createTunable() {
+        TalonFXMotor leader = new TalonFXMotor(this.leaderID, this.invert, !this.coast);
 
         if (this.softLimit) {
             leader.configForwardSoftLimitThreshold((int) Math.round(this.forwardSoftLimit * 2048));
@@ -25,14 +18,10 @@ public class TalonFXGroup extends TunableMotorGroup {
         }
 
         for (int followerID : this.followerIDs) {
-            TalonFX follower = new TalonFX(followerID);
-
-            follower.configFactoryDefault();
-            follower.setInverted(this.invert);
-            follower.setNeutralMode(this.coast ? NeutralMode.Coast : NeutralMode.Brake);
+            TalonFXMotor follower = new TalonFXMotor(followerID, this.invert, !this.coast);
             follower.follow(leader);
         }
 
-        return new TalonFXMotor(leader);
+        return leader;
     }
 }

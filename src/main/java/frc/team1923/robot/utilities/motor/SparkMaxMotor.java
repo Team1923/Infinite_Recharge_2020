@@ -5,20 +5,21 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 
-public class SparkMaxMotor implements TunableMotor {
-    private final CANSparkMax sparkMax;
-    private final CANEncoder encoder;
-    private final CANPIDController pidController;
+public class SparkMaxMotor extends CANSparkMax implements TunableMotor {
+    private final CANEncoder encoder = this.getEncoder();
+    private final CANPIDController pidController = this.getPIDController();
 
-    public SparkMaxMotor(CANSparkMax sparkMax) {
-        this.sparkMax = sparkMax;
-        this.encoder = sparkMax.getEncoder();
-        this.pidController = sparkMax.getPIDController();
+    public SparkMaxMotor(int deviceID, boolean invert, boolean brake) {
+        super(deviceID, MotorType.kBrushless);
+
+        this.restoreFactoryDefaults();
+        this.setInverted(invert);
+        this.setIdleMode(brake ? IdleMode.kBrake : IdleMode.kCoast);
     }
 
     @Override
     public void setSpeed(double speed) {
-        this.sparkMax.set(speed);
+        this.set(speed);
     }
 
     @Override
@@ -48,8 +49,8 @@ public class SparkMaxMotor implements TunableMotor {
 
     @Override
     public void setRamp(double rate) {
-        this.sparkMax.setOpenLoopRampRate(rate);
-        this.sparkMax.setClosedLoopRampRate(rate);
+        this.setOpenLoopRampRate(rate);
+        this.setClosedLoopRampRate(rate);
     }
 
     @Override

@@ -1,68 +1,71 @@
 package frc.team1923.robot.utilities.motor;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-public class TalonFXMotor implements TunableMotor {
-    private final TalonFX talonFX;
+public class TalonFXMotor extends TalonFX implements TunableMotor {
+    public TalonFXMotor(int deviceID, boolean invert, boolean brake) {
+        super(deviceID);
 
-    public TalonFXMotor(TalonFX talonFX) {
-        this.talonFX = talonFX;
+        this.configFactoryDefault();
+        this.setInverted(invert);
+        this.setNeutralMode(brake ? NeutralMode.Brake : NeutralMode.Coast);
     }
 
     @Override
     public void setSpeed(double speed) {
-        this.talonFX.set(ControlMode.PercentOutput, speed);
+        this.set(ControlMode.PercentOutput, speed);
     }
 
     @Override
     public double getPosition() {
-        return this.talonFX.getSelectedSensorPosition() / 2048.0;
+        return this.getSelectedSensorPosition() / 2048.0;
     }
 
     @Override
     public void resetPosition(double position) {
-        this.talonFX.setSelectedSensorPosition((int) Math.round(position * 2048));
+        this.setSelectedSensorPosition((int) Math.round(position * 2048));
     }
 
     @Override
     public void setPosition(double position) {
-        this.talonFX.set(ControlMode.Position, position * 2048);
-    }
-
-    @Override
-    public void setVelocity(double velocity) {
-        this.talonFX.set(ControlMode.Velocity, velocity * 2048 / 600);
+        this.set(ControlMode.Position, position * 2048);
     }
 
     @Override
     public double getVelocity() {
-        return this.talonFX.getSelectedSensorVelocity() * 600 / 2048.0;
+        return this.getSelectedSensorVelocity() * 600 / 2048.0;
+    }
+
+    @Override
+    public void setVelocity(double velocity) {
+        this.set(ControlMode.Velocity, velocity * 2048 / 600);
     }
 
     @Override
     public void setRamp(double rate) {
-        this.talonFX.configOpenloopRamp(rate);
-        this.talonFX.configClosedloopRamp(rate);
+        this.configOpenloopRamp(rate);
+        this.configClosedloopRamp(rate);
     }
 
     @Override
     public void setP(double p) {
-        this.talonFX.config_kP(0, p);
+        this.config_kP(0, p);
     }
 
     @Override
     public void setI(double i) {
-        this.talonFX.config_kI(0, i);
+        this.config_kI(0, i);
     }
 
     @Override
     public void setD(double d) {
-        this.talonFX.config_kD(0, d);
+        this.config_kD(0, d);
     }
 
     @Override
     public void setF(double f) {
-        this.talonFX.config_kF(0, f);
+        this.config_kF(0, f);
     }
 }

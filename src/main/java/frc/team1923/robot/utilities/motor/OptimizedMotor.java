@@ -5,7 +5,7 @@ public class OptimizedMotor implements Motor {
         Speed, Position, Velocity
     }
 
-    private final Motor motor;
+    public final Motor motor;
     private Mode mode = Mode.Speed;
     private double value;
 

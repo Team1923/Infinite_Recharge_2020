@@ -1,22 +1,15 @@
 package frc.team1923.robot.utilities.motor;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMax.SoftLimitDirection;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class SparkMaxGroup extends TunableMotorGroup {
+public class SparkMaxGroup extends TunableMotorGroup<SparkMaxMotor> {
     public SparkMaxGroup(int leaderID, int... followerIDs) {
         super(leaderID, followerIDs);
     }
 
     @Override
-    public TunableMotor createTunable() {
-        CANSparkMax leader = new CANSparkMax(this.leaderID, MotorType.kBrushless);
-
-        leader.restoreFactoryDefaults();
-        leader.setInverted(this.invert);
-        leader.setIdleMode(this.coast ? IdleMode.kCoast : IdleMode.kBrake);
+    public SparkMaxMotor createTunable() {
+        SparkMaxMotor leader = new SparkMaxMotor(this.leaderID, this.invert, !this.coast);
 
         if (this.softLimit) {
             leader.setSoftLimit(SoftLimitDirection.kForward, (float) this.forwardSoftLimit);
@@ -28,13 +21,10 @@ public class SparkMaxGroup extends TunableMotorGroup {
 
         for (int followerID : this.followerIDs) {
             @SuppressWarnings("resource")
-            CANSparkMax follower = new CANSparkMax(followerID, MotorType.kBrushless);
-
-            follower.restoreFactoryDefaults();
-            follower.setIdleMode(this.coast ? IdleMode.kCoast : IdleMode.kBrake);
+            SparkMaxMotor follower = new SparkMaxMotor(followerID, this.invert, !this.coast);
             follower.follow(leader);
         }
 
-        return new SparkMaxMotor(leader);
+        return leader;
     }
 }
