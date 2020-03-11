@@ -3,9 +3,10 @@ package frc.team1923.robot.subsystems;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import frc.team1923.robot.Constants.Conveyor;
-import frc.team1923.robot.utilities.command.Subsystem;
+import frc.team1923.robot.utilities.command.SingleMotorSubsystem;
+import frc.team1923.robot.utilities.motor.SparkMaxMotor;
 
-public class ConveyorSubsystem extends Subsystem {
+public class ConveyorSubsystem extends SingleMotorSubsystem<SparkMaxMotor> {
     public ConveyorSubsystem() {
         super(Conveyor.CONVEYOR);
     }

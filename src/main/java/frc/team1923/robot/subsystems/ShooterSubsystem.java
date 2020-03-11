@@ -2,9 +2,10 @@ package frc.team1923.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team1923.robot.Constants.Shooter;
-import frc.team1923.robot.utilities.command.Subsystem;
+import frc.team1923.robot.utilities.command.SingleMotorSubsystem;
+import frc.team1923.robot.utilities.motor.TalonFXMotor;
 
-public class ShooterSubsystem extends Subsystem {
+public class ShooterSubsystem extends SingleMotorSubsystem<TalonFXMotor> {
     public ShooterSubsystem() {
         super(Shooter.SHOOTER);
     }
@@ -41,8 +42,12 @@ public class ShooterSubsystem extends Subsystem {
         this.targetVelocity = velocity;
     }
 
+    public boolean spunUp() {
+        return this.spinningUp && this.getVelocity() > this.targetVelocity - 50;
+    }
+
     @Override
     public void periodic() {
-        SmartDashboard.putBoolean("Spun Up", this.spinningUp && this.getVelocity() > this.targetVelocity - 50);
+        SmartDashboard.putBoolean("Spun Up", this.spunUp());
     }
 }

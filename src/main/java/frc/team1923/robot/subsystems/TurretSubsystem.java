@@ -5,9 +5,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.team1923.robot.Constants.Turret;
-import frc.team1923.robot.utilities.command.Subsystem;
+import frc.team1923.robot.utilities.command.SingleMotorSubsystem;
+import frc.team1923.robot.utilities.dashboard.ConfigurableBoolean;
+import frc.team1923.robot.utilities.dashboard.ConfigurableDouble;
+import frc.team1923.robot.utilities.motor.SparkMaxMotor;
 
-public class TurretSubsystem extends Subsystem {
+public class TurretSubsystem extends SingleMotorSubsystem<SparkMaxMotor> {
     public TurretSubsystem() {
         super(Turret.TURRET);
     }
@@ -33,16 +36,8 @@ public class TurretSubsystem extends Subsystem {
     }
 
     {
-        SmartDashboard.putBoolean("Reset Turret", true);
-        SmartDashboard.putBoolean("Reset Turret", false);
-    }
+        new ConfigurableBoolean("Reset Turret", () -> this.resetPosition(0));
 
-    @Override
-    public void periodic() {
-        if (SmartDashboard.getBoolean("Reset Turret", false)) {
-            SmartDashboard.putBoolean("Reset Turret", false);
-
-            this.resetPosition(0);
-        }
+        new ConfigurableDouble("Turret kP", kP -> this.getMotor().setP(kP), 0.04);
     }
 }
