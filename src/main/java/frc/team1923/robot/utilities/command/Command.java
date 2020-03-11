@@ -1,18 +1,25 @@
 package frc.team1923.robot.utilities.command;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import java.util.Set;
 
-public abstract class Command extends CommandBase {
-    private final Subsystem subsystem;
+public class Command<T extends Subsystem> implements edu.wpi.first.wpilibj2.command.Command {
+    protected final T subsystem;
 
-    protected Command(Subsystem subsystem) {
+    protected Command(T subsystem) {
         this.subsystem = subsystem;
+    }
 
-        this.addRequirements(subsystem);
+    @Override
+    public Set<edu.wpi.first.wpilibj2.command.Subsystem> getRequirements() {
+        return Set.of(this.subsystem);
     }
 
     public void setAsDefault() {
         this.subsystem.setDefaultCommand(this);
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        this.subsystem.stop();
     }
 }
