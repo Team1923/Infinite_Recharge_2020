@@ -2,7 +2,6 @@ package frc.team1923.robot.subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.team1923.robot.Constants.Turret;
 import frc.team1923.robot.utilities.command.SingleMotorSubsystem;
