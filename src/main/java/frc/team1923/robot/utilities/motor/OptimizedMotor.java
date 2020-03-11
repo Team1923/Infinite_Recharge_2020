@@ -1,15 +1,15 @@
 package frc.team1923.robot.utilities.motor;
 
-public class OptimizedMotor implements Motor {
+public class OptimizedMotor<T extends Motor> implements Motor {
     private enum Mode {
         Speed, Position, Velocity
     }
 
-    public final Motor motor;
+    public final T motor;
     private Mode mode = Mode.Speed;
     private double value;
 
-    public OptimizedMotor(Motor motor) {
+    public OptimizedMotor(T motor) {
         this.motor = motor;
     }
 
