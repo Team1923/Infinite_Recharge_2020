@@ -5,11 +5,16 @@ public abstract class TunableMotorGroup<T extends TunableMotor> extends MotorGro
         super(leaderID, followerIDs);
     }
 
-    public abstract T createTunable();
+    protected abstract T createTunable();
 
     @Override
     public T create() {
         T motor = this.createTunable();
+
+        if (this.softLimit) {
+            motor.setSoftLimits(this.reverseSoftLimit, this.forwardSoftLimit);
+            motor.enableSoftLimits();
+        }
 
         motor.setRamp(this.rampRate);
 
