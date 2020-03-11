@@ -7,16 +7,28 @@ import frc.team1923.robot.utilities.motor.group.MotorGroup;
 
 public class SingleMotorSubsystem<T extends Motor> extends MotorSubsystem {
     private final T rawMotor;
-    private final OptimizedMotor<T> motor;
+    private final OptimizedMotor motor;
+
+    private static Motor tempRawMotor;
+    private static OptimizedMotor tempMotor;
+
+    private static Motor wrapGroup(MotorGroup<?> motorGroup) {
+        SingleMotorSubsystem.tempRawMotor = motorGroup.create();
+        SingleMotorSubsystem.tempMotor = new OptimizedMotor(SingleMotorSubsystem.tempRawMotor);
+        return SingleMotorSubsystem.tempMotor;
+    }
 
     public SingleMotorSubsystem(MotorGroup<T> motorGroup) {
-        super(motorGroup.create());
+        super(SingleMotorSubsystem.wrapGroup(motorGroup));
 
         @SuppressWarnings("unchecked")
-        T motor = (T) this.motors[0];
+        T rawMotor = (T) SingleMotorSubsystem.tempRawMotor;
 
-        this.rawMotor = motor;
-        this.motor = new OptimizedMotor<>(motor);
+        this.rawMotor = rawMotor;
+        this.motor = SingleMotorSubsystem.tempMotor;
+
+        SingleMotorSubsystem.tempRawMotor = null;
+        SingleMotorSubsystem.tempMotor = null;
     }
 
     protected T getMotor() {
