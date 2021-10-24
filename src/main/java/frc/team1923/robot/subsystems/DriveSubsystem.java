@@ -17,9 +17,4 @@ public class DriveSubsystem extends MotorSubsystem {
         this.left.setSpeed(left);
         this.right.setSpeed(right);
     }
-
-    public void stop() {
-        this.left.stop();
-        this.right.stop();
-    }
 }

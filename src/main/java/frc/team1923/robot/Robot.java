@@ -28,4 +28,16 @@ public class Robot extends TimedRobot {
     public void robotPeriodic() {
         CommandScheduler.getInstance().run();
     }
+
+    @Override
+    public void teleopInit() {}
+
+    @Override
+    public void teleopPeriodic() {}
+
+    @Override
+    public void disabledInit() {}
+
+    @Override
+    public void disabledPeriodic() {}
 }

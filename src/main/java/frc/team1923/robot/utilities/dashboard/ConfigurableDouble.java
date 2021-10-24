@@ -1,4 +1,4 @@
-package frc.team1923.robot.utilities;
+package frc.team1923.robot.utilities.dashboard;
 
 import edu.wpi.first.networktables.EntryListenerFlags;
 import edu.wpi.first.networktables.NetworkTableEntry;

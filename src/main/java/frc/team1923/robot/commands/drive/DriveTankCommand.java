@@ -1,9 +1,10 @@
 package frc.team1923.robot.commands.drive;
 
 import frc.team1923.robot.subsystems.DriveSubsystem;
+import frc.team1923.robot.utilities.command.Command;
 import frc.team1923.robot.utilities.controller.Axis;
 
-public class DriveTankCommand extends DriveCommand {
+public class DriveTankCommand extends Command<DriveSubsystem> {
     private final Axis left, right;
 
     public DriveTankCommand(DriveSubsystem drive, Axis left, Axis right) {
@@ -15,6 +16,6 @@ public class DriveTankCommand extends DriveCommand {
 
     @Override
     public void execute() {
-        this.drive.setSpeed(this.left.get(), this.right.get());
+        this.subsystem.setSpeed(this.left.get(), this.right.get());
     }
 }

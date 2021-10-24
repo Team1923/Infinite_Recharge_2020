@@ -25,8 +25,7 @@ public class Limelight {
 
         this.table.getEntry("camMode").setDouble(enabled ? 0 : 1);
         this.table.getEntry("ledMode").setDouble(enabled ? 0 : 1);
-
-        if (enabled) this.table.getEntry("pipeline").setDouble(this.pipeline);
+        this.table.getEntry("pipeline").setDouble(enabled ? this.pipeline : 0);
     }
 
     public void enable() {
