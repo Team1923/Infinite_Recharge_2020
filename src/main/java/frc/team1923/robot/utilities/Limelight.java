@@ -4,8 +4,8 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Limelight {
-    private final NetworkTable table;
-    private double x, y;
+    private NetworkTable table;
+    private double x, y, area;
 
     public Limelight(String table) {
         this.table = NetworkTableInstance.getDefault().getTable(table);
@@ -15,32 +15,35 @@ public class Limelight {
         this("limelight");
     }
 
-    public boolean hasValidTarget() {
-        return this.table.getEntry("tv").getDouble(0) == 1;
+    public boolean isValidTarget() {
+        return this.table.getEntry("tv").getNumber(0).intValue() == 1;
     }
 
     public double getX() {
-        if (this.hasValidTarget()) {
-            this.x = this.table.getEntry("tx").getDouble(this.x);
+        if (this.isValidTarget()) {
+            this.x = this.table.getEntry("tx").getDouble(0);
         }
 
         return this.x;
     }
 
     public double getY() {
-        if (this.hasValidTarget()) {
-            this.y = this.table.getEntry("ty").getDouble(this.y);
+        if (this.isValidTarget()) {
+            this.y = this.table.getEntry("ty").getDouble(0);
         }
 
         return this.y;
     }
 
-    public void setPipeline(int pipeline) {
-        this.table.getEntry("pipeline").setDouble(pipeline);
+    public double getArea() {
+        if (this.isValidTarget()) {
+            this.area = this.table.getEntry("ta").getDouble(0);
+        }
+
+        return this.area;
     }
 
-    public void setCameraMode(boolean driverCamera) {
-        this.table.getEntry("camMode").setDouble(driverCamera ? 1 : 0);
-        this.table.getEntry("ledMode").setDouble(driverCamera ? 1 : 0);
+    public void setPipeline(int pipeline) {
+        this.table.getEntry("pipeline").setDouble(pipeline);
     }
 }

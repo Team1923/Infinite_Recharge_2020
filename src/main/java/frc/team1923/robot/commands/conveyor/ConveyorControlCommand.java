@@ -7,8 +7,6 @@ import frc.team1923.robot.RobotContainer;
 public class ConveyorControlCommand extends ConveyorCommand {
     public ConveyorControlCommand(RobotContainer robotContainer) {
         super(robotContainer);
-
-        SmartDashboard.putBoolean("Indexing", false);
     }
 
     @Override

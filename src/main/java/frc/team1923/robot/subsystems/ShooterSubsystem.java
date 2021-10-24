@@ -12,10 +12,8 @@ import frc.team1923.robot.utilities.ConfigurableDouble;
 public class ShooterSubsystem extends SubsystemBase {
     private WPI_TalonFX shooter = Shooter.SHOOTER.create();
 
-    {
-        new ConfigurableDouble("Shooter kP", kP -> this.shooter.config_kP(0, kP), 0.2);
-        new ConfigurableDouble("Shooter kF", kF -> this.shooter.config_kF(0, kF), 0.05);
-    }
+    private ConfigurableDouble kP = new ConfigurableDouble("Shooter kP", kP -> this.shooter.config_kP(0, kP), 0.2);
+    private ConfigurableDouble kF = new ConfigurableDouble("Shooter kF", kF -> this.shooter.config_kF(0, kF), 0.05);
 
     public void set(double speed) {
         this.shooter.set(speed);
@@ -35,6 +33,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Shooter Velocity", this.getVelocity());
+        //SmartDashboard.putNumber("Shooter Velocity", this.getVelocity());
+        SmartDashboard.putString("Shooter Velocity", "" + Math.round(this.getVelocity()));
     }
 }

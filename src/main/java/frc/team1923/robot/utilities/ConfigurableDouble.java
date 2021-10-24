@@ -7,13 +7,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.function.DoubleConsumer;
 
 public class ConfigurableDouble {
-    public ConfigurableDouble(String name, DoubleConsumer callback, double defaultValue) {
+    public ConfigurableDouble(String name, DoubleConsumer callback, double defaultValue) {//}, int x) {
         NetworkTableEntry entry = SmartDashboard.getEntry(name);
         entry.addListener(entryNotification -> callback.accept(entryNotification.value.getDouble()), EntryListenerFlags.kUpdate);
 
-        defaultValue = entry.getDouble(defaultValue);
-        entry.setDouble(-1337);
-        entry.setDouble(defaultValue);
+        entry.setDefaultDouble(defaultValue);
         callback.accept(defaultValue);
     }
 

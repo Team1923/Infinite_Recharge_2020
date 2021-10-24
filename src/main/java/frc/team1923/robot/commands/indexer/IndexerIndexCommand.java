@@ -2,8 +2,8 @@ package frc.team1923.robot.commands.indexer;
 
 import frc.team1923.robot.RobotContainer;
 
-public class IndexerControlCommand extends IndexerCommand {
-    public IndexerControlCommand(RobotContainer robotContainer) {
+public class IndexerIndexCommand extends IndexerCommand {
+    public IndexerIndexCommand(RobotContainer robotContainer) {
         super(robotContainer);
     }
 

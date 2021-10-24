@@ -4,14 +4,19 @@ public abstract class MotorGroup<This extends MotorGroup<This>> {
     protected final int leaderID;
     protected final int[] followerIDs;
 
-    protected boolean inverted, coast;
+    protected boolean inverted = false;
+    protected boolean coast = false;
 
-    protected boolean softLimit;
-    protected double forwardSoftLimit, reverseSoftLimit;
+    protected boolean softLimit = false;
+    protected double forwardSoftLimit = 0;
+    protected double reverseSoftLimit = 0;
 
-    protected double rampRate;
+    protected double rampRate = 0;
 
-    protected double p, i, d, f;
+    protected double p = 0;
+    protected double i = 0;
+    protected double d = 0;
+    protected double f = 0;
 
     protected MotorGroup(int leaderID, int... followerIDs) {
         this.leaderID = leaderID;

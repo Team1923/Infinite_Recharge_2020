@@ -4,11 +4,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.team1923.robot.RobotContainer;
 
-public class TurretControlCommand extends TurretCommand {
-    public TurretControlCommand(RobotContainer robotContainer) {
+public class TurretRotateCommand extends TurretCommand {
+    public TurretRotateCommand(RobotContainer robotContainer) {
         super(robotContainer);
-
-        SmartDashboard.putBoolean("Following", false);
     }
 
     @Override

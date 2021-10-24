@@ -1,17 +1,27 @@
 package frc.team1923.robot.commands.indexer;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-
 import frc.team1923.robot.RobotContainer;
 
-public class IndexerCycleCommand extends SequentialCommandGroup {
+public class IndexerCycleCommand extends IndexerCommand {
     public IndexerCycleCommand(RobotContainer robotContainer) {
-        this.addCommands(
-            new IndexerSetCommand(robotContainer, -0.75).withTimeout(0.25),
-            new WaitCommand(0.25),
-            new IndexerSetCommand(robotContainer, 0.75).withTimeout(0.25),
-            new WaitCommand(0.25)
-        );
+        super(robotContainer);
+    }
+
+    private int ticks;
+
+    @Override
+    public void initialize() {
+        this.ticks = 0;
+    }
+
+    @Override
+    public void execute() {
+        this.indexer.set(this.ticks < 13 ? -0.3 : 0.3);
+        ++this.ticks;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return this.ticks >= 26;
     }
 }

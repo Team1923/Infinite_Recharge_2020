@@ -13,7 +13,6 @@ public class TalonFXGroup extends MotorGroup<TalonFXGroup> {
         TalonFXConfiguration leaderConfig = new TalonFXConfiguration();
 
         leaderConfig.closedloopRamp = this.rampRate;
-        leaderConfig.openloopRamp = this.rampRate;
 
         leaderConfig.slot0.kP = this.p;
         leaderConfig.slot0.kI = this.i;

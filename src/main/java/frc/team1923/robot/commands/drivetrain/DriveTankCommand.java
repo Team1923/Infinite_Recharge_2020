@@ -12,8 +12,8 @@ public class DriveTankCommand extends DrivetrainCommand {
         double left = this.driver.leftStick.y.get();
         double right = this.driver.rightStick.y.get();
 
-        left *= Math.abs(left);
-        right *= Math.abs(right);
+        left = Math.pow(left, 3);
+        right = Math.pow(right, 3);
 
         this.drivetrain.set(left, right);
     }
