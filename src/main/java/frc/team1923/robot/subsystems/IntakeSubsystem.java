@@ -1,24 +1,19 @@
 package frc.team1923.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import com.revrobotics.CANSparkMax;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1923.robot.Constants.Intake;
-import frc.team1923.robot.utilities.command.SingleMotorSubsystem;
-import frc.team1923.robot.utilities.motor.SparkMaxMotor;
 
-public class IntakeSubsystem extends SingleMotorSubsystem<SparkMaxMotor> {
-    public IntakeSubsystem() {
-        super(Intake.INTAKE);
+public class IntakeSubsystem extends SubsystemBase {
+    private CANSparkMax intake = Intake.INTAKE.create();
+
+    public void set(double speed) {
+        this.intake.set(speed);
     }
 
-    private final DoubleSolenoid intakeSolenoid = new DoubleSolenoid(0, 1);
-
-    public void bringDown() {
-        this.intakeSolenoid.set(Value.kForward);
-    }
-
-    public void bringUp() {
-        this.intakeSolenoid.set(Value.kReverse);
+    public void stop() {
+        this.intake.stopMotor();
     }
 }

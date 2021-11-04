@@ -1,23 +1,19 @@
 package frc.team1923.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 import frc.team1923.robot.Constants.Climber;
-import frc.team1923.robot.utilities.command.SingleMotorSubsystem;
-import frc.team1923.robot.utilities.motor.TalonFXMotor;
 
-public class ClimberSubsystem extends SingleMotorSubsystem<TalonFXMotor> {
-    public ClimberSubsystem() {
-        super(Climber.CLIMBER);
+public class ClimberSubsystem extends SubsystemBase {
+    private WPI_TalonFX climber = Climber.CLIMBER.create();
+
+    public void set(double speed) {
+        this.climber.set(speed);
     }
 
-    private final DoubleSolenoid climberSolenoid = new DoubleSolenoid(2, 3);
-
-    public void bringDown() {
-        this.climberSolenoid.set(Value.kForward);
-    }
-
-    public void bringUp() {
-        this.climberSolenoid.set(Value.kReverse);
+    public void stop() {
+        this.climber.stopMotor();
     }
 }
