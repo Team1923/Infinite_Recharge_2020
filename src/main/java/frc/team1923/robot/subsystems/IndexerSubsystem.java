@@ -1,19 +1,11 @@
 package frc.team1923.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.team1923.robot.Constants.Indexer;
+import frc.team1923.robot.utilities.command.SingleMotorSubsystem;
+import frc.team1923.robot.utilities.motor.SparkMaxMotor;
 
-public class IndexerSubsystem extends SubsystemBase {
-    private CANSparkMax indexer = Indexer.INDEXER.create();
-
-    public void set(double speed) {
-        this.indexer.set(speed);
-    }
-
-    public void stop() {
-        this.indexer.stopMotor();
+public class IndexerSubsystem extends SingleMotorSubsystem<SparkMaxMotor> {
+    public IndexerSubsystem() {
+        super(Indexer.INDEXER);
     }
 }

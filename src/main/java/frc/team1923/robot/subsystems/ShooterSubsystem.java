@@ -1,40 +1,53 @@
 package frc.team1923.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.team1923.robot.Constants.Shooter;
-import frc.team1923.robot.utilities.ConfigurableDouble;
+import frc.team1923.robot.utilities.command.SingleMotorSubsystem;
+import frc.team1923.robot.utilities.motor.TalonFXMotor;
 
-public class ShooterSubsystem extends SubsystemBase {
-    private WPI_TalonFX shooter = Shooter.SHOOTER.create();
-
-    {
-        new ConfigurableDouble("Shooter kP", kP -> this.shooter.config_kP(0, kP), 0.2);
-        new ConfigurableDouble("Shooter kF", kF -> this.shooter.config_kF(0, kF), 0.05);
+public class ShooterSubsystem extends SingleMotorSubsystem<TalonFXMotor> {
+    public ShooterSubsystem() {
+        super(Shooter.SHOOTER);
     }
 
-    public void set(double speed) {
-        this.shooter.set(speed);
+    private boolean spinningUp;
+    private double targetVelocity;
+
+    @Override
+    public void setSpeed(double speed) {
+        super.setSpeed(speed);
+
+        this.spinningUp = false;
     }
 
-    public void setVelocity(double velocity) {
-        this.shooter.set(ControlMode.Velocity, velocity * 2048 / 600.0);
-    }
-
-    public double getVelocity() {
-        return this.shooter.getSelectedSensorVelocity() * 600 / 2048.0;
-    }
-
+    @Override
     public void stop() {
-        this.shooter.stopMotor();
+        super.stop();
+
+        this.spinningUp = false;
+    }
+
+    @Override
+    public void setPosition(double position) {
+        super.setPosition(position);
+
+        this.spinningUp = false;
+    }
+
+    @Override
+    public void setVelocity(double velocity) {
+        super.setVelocity(velocity);
+
+        this.spinningUp = true;
+        this.targetVelocity = velocity;
+    }
+
+    public boolean spunUp() {
+        return this.spinningUp && this.getVelocity() > this.targetVelocity - 50;
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Shooter Velocity", this.getVelocity());
+        SmartDashboard.putBoolean("Spun Up", this.spunUp());
     }
 }
